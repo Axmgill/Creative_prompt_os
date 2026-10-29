@@ -8,6 +8,14 @@ license: See repository LICENSE / owner's terms. No license is bundled by defaul
 
 A versioned library of reusable prompt "roles" for running an AI-assisted creative production pipeline end to end — from a raw brief to final QA — without re-deriving reasoning from scratch on every project. Originally compiled across an 8-part engagement; this skill packages that library for reuse.
 
+**Not using Claude?** Nothing here is Claude-specific. The same protocol ships three ways, and `tools/check.sh` keeps them in agreement:
+
+- **`AGENTS.md`** — the universal entry point, written to the `AGENTS.md` standard (Codex, Cursor, GitHub Copilot, Gemini CLI, Jules, Amp, VS Code, Devin, Factory read it natively).
+- **`portable/`** — paste-ready versions for hosts with no file access: Gemini Gems, ChatGPT, Copilot chat, Claude Projects, any API system prompt.
+- **`llms.txt` / `llms-full.txt`** — for web agents that can fetch one URL but cannot browse a repo.
+
+If you are Claude, keep reading; this file is your entry point.
+
 ## When to use this skill
 
 Load this skill when the user's request matches any of these jobs:
@@ -30,7 +38,17 @@ If the user just wants a single finished prompt fast and already knows what they
 
 ```
 ai-creative-os/
-├── SKILL.md                     ← this file (always loaded)
+├── SKILL.md                     ← this file (always loaded, Claude)
+├── AGENTS.md                    ← same protocol for non-Claude agents (AGENTS.md standard)
+├── llms.txt                     ← map for web agents; llms-full.txt is the whole corpus
+├── portable/                    ← paste-ready prompts for hosts with no file access
+│   ├── README.md                ← which portable file for which host
+│   ├── system-prompt.md         ← APIs, Custom GPTs, Claude Projects
+│   ├── gemini-gem-instructions.md
+│   ├── chatgpt-instructions.md  ← ChatGPT / Copilot / Cursor
+│   ├── mini-prompt.md           ← fields capped near 1,500 chars
+│   └── kickoff-prompt.md        ← paste-first message for browsing chats
+├── tools/                       ← build.sh (rebuild llms-full.txt), check.sh (verify budgets)
 ├── reference/                   ← the 8-part core framework (load only the part(s) you need)
 │   ├── part-1-research-and-routing.md
 │   ├── part-2-library-structure-and-foundation.md

@@ -1,35 +1,98 @@
-# AI Creative OS — Claude Agent Skill
+# AI Creative OS — a prompt library any agent can run
 
-A packaged [Claude Agent Skill](https://docs.anthropic.com/en/docs/agents-and-tools/agent-skills) version of the **AI Creative Operating System** — a versioned prompt library for running an AI-assisted creative production pipeline end to end: brief → creative strategy → art direction → styleframes → image generation → video generation → storyboard/motion/edit → asset management & QA.
+A versioned, model-agnostic prompt-engineering operating system for AI-driven creative production, packaged so that **any** agent can use it — not just Claude.
+
+Pipeline it covers: brief → creative strategy and territories → art direction → design DNA and styleframes → image generation → video generation (with camera and character continuity) → storyboard → motion/edit/After Effects/sound → asset management and QA.
+
+## Why it works across agents
+
+The library carries its own protocol in plain Markdown rather than relying on one vendor's feature. Three layers, same rules:
+
+| Layer | File | Read by |
+|---|---|---|
+| Universal agent instructions | [`AGENTS.md`](AGENTS.md) | Codex, Cursor, GitHub Copilot, Gemini CLI, Jules, Amp, VS Code, Devin, Factory — the `AGENTS.md` standard, stewarded by the Agentic AI Foundation at the Linux Foundation |
+| Claude Agent Skill | [`SKILL.md`](SKILL.md) | Claude Code, Claude.ai skills, and any host that implements `SKILL.md` (Codex and Cursor also read it) |
+| Portable mode | [`portable/`](portable/) | Gemini Gems, ChatGPT, Copilot chat, Claude Projects, any API — hosts with no file access |
+
+Plus two machine-readable entry points for web agents: [`llms.txt`](llms.txt) (the map) and [`llms-full.txt`](llms-full.txt) (the whole corpus in one file).
+
+`AGENTS.md`, `SKILL.md`, and the portable prompts say the same things on purpose. `tools/check.sh` keeps them honest.
+
+## Install, by host
+
+**Claude Code**
+```bash
+git clone https://github.com/Axmgill/Creative_prompt_os.git ~/.claude/skills/ai-creative-os   # all projects
+git clone https://github.com/Axmgill/Creative_prompt_os.git .claude/skills/ai-creative-os     # this project
+```
+Claude discovers `SKILL.md` and loads the reference files on demand.
+
+**Claude.ai (web)** — Projects → instructions ← [`portable/system-prompt.md`](portable/system-prompt.md); add the reference parts as project knowledge. Or upload this repo as a skill via Settings → Capabilities → Skills.
+
+**Codex, Cursor, Copilot, Gemini CLI, Jules, Amp, VS Code, Devin, Factory** — clone the repo into the workspace. `AGENTS.md` at the root is picked up automatically. Nothing else to configure.
+
+- Gemini CLI also honours `GEMINI.md` if you want a project-local override; it reads `AGENTS.md` natively.
+- Cursor: auto-reads `AGENTS.md`; if you prefer `.cursor/rules/`, copy [`portable/chatgpt-instructions.md`](portable/chatgpt-instructions.md)'s block into a rule with `alwaysApply: true`.
+- Copilot: reads `AGENTS.md`; `.github/copilot-instructions.md` also works with the same block.
+
+**Gemini on the web (a Gem)** — Gems → New Gem → Instructions ← [`portable/gemini-gem-instructions.md`](portable/gemini-gem-instructions.md); Knowledge ← `SKILL.md`, `prompts/standalone-prompts.md`, and the `reference/part-*.md` files you use. About three minutes; step-by-step in [`portable/README.md`](portable/README.md).
+
+**Gemini on the web (no Gem, just a chat)** — paste [`portable/kickoff-prompt.md`](portable/kickoff-prompt.md) as your first message and let it fetch `llms.txt`. Or give it `https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/llms-full.txt` for the whole library in one URL.
+
+**ChatGPT** — Custom GPT: Instructions ← [`portable/system-prompt.md`](portable/system-prompt.md), Knowledge ← `SKILL.md` + reference parts. Custom instructions: [`portable/chatgpt-instructions.md`](portable/chatgpt-instructions.md) (paid) or [`portable/mini-prompt.md`](portable/mini-prompt.md) (free tier).
+
+**Anything else with a system prompt** — [`portable/system-prompt.md`](portable/system-prompt.md) into the system message; attach reference parts as retrieval documents if you have them.
 
 ## What's in here
 
-- **`SKILL.md`** — the skill entry point. Contains the trigger description, an overview of the pipeline, a stable ID registry for every prompt domain (`CD`, `AD`, `IMG`, `VID`, etc.), and usage conventions. This is the only file loaded automatically; everything else is loaded on demand.
-- **`reference/`** — the original 8-part core framework (tool routing, library structure, creative/art direction, design DNA & styleframes, image generation, video generation & continuity, storyboard/motion/edit/sound, asset management & QA).
-- **`prompts/prompts-only.md`** — curated, copyable prompt extract of the full 8-part library.
-- **`prompts/standalone-prompts.md`** — the same prompts, each rewritten to be fully self-contained (no cross-references to other files needed to use any single one).
-- **`prompts/extensions/`** — additional prompt sets built after the original 8-part library (talking-head "content creator" prompts, reference-photo-locked identity prompts, UGC/avatar prompts). Not yet merged into the numbered domain system but fully usable as-is.
-
-## Installing as a Claude Skill
-
-**Claude.ai (personal skills):** zip this folder (or point to this repo) and upload it via Settings → Capabilities → Skills.
-
-**Claude Code / API (project or user skill):**
-```bash
-# Project-level (only available in this repo/project)
-git clone https://github.com/Axmgill/Creative_prompt_os.git .claude/skills/ai-creative-os
-
-# User-level (available in all your projects)
-git clone https://github.com/Axmgill/Creative_prompt_os.git ~/.claude/skills/ai-creative-os
 ```
-Claude will auto-discover `SKILL.md` and load the rest of the files on demand when a request matches the skill's description.
+AGENTS.md                      ← universal entry point: protocol, routing table, guardrails
+SKILL.md                       ← Claude Agent Skill entry point + ID registry
+llms.txt / llms-full.txt       ← machine-readable map / whole corpus, one fetch each
+reference/                     ← the 8-part core framework (~5,900 lines)
+  part-1-research-and-routing.md
+  part-2-library-structure-and-foundation.md
+  part-3-creative-art-direction.md
+  part-4-design-dna-styleframes.md
+  part-5-image-generation.md
+  part-6-video-generation.md
+  part-7-storyboards-motion-editing-ae-sound.md
+  part-8-asset-management-qa-workflows.md
+prompts/
+  prompts-only.md              ← curated copyable extract of the whole library
+  standalone-prompts.md        ← same prompts, each fully self-contained
+  extensions/                  ← talking-head, reference-locked identity, creator set, UGC/avatar
+portable/
+  README.md                    ← which file for which host
+  system-prompt.md             ← full system prompt (~5,600 chars)
+  gemini-gem-instructions.md   ← Gemini Gem fit (~3,150 chars)
+  chatgpt-instructions.md      ← ChatGPT / Copilot / Cursor (~3,100 chars)
+  mini-prompt.md               ← tiny fields (~1,400 chars)
+  kickoff-prompt.md            ← paste-first message for browsing chats
+tools/
+  build.sh                     ← regenerate llms-full.txt
+  check.sh                     ← verify budgets, paths, and corpus freshness
+```
 
-## Notes
+Every prompt carries a stable `[DOMAIN]-[NN]` ID (`CD-01`, `IP-05`, `VP-07`, `QA-00`, …) so routing works the same no matter which host is reading it.
 
-- Part 1 (tool/model routing) contains a dated research snapshot of AI tools and model versions — treat specific version claims there as something to re-verify periodically, not permanent fact.
-- The `prompts/extensions/` creator-reference-locked prompts require documented consent before generating AI images of a real person's likeness — this is called out directly in that file and is not optional.
-- No license file is included by default. Add one (or your organization's internal-use terms) before treating this as redistributable beyond your own use.
+## Keeping it honest
+
+```bash
+tools/check.sh     # AGENTS.md size, portable character budgets, path references, corpus freshness
+tools/build.sh     # rebuild llms-full.txt after editing any reference or prompt file
+```
+
+Host character limits are enforced by the hosts and change without notice. The budgets in `tools/check.sh` were checked in October 2026; if a limit tightens, trim the craft rules before the consent and approval clauses.
+
+## Notes and limits
+
+- **Part 1 is a dated snapshot** (research date in its header) of the AI tool/model landscape. Re-verify version claims before relying on them.
+- **Real people.** `prompts/extensions/creator-reference-locked-prompts.md` requires documented consent before generating images of a real person's likeness. That is not optional, and the portable prompts repeat it.
+- **Synthetic humans** need AI-disclosure in many advertising contexts; the library flags this but cannot verify current policy or law for you.
+- **No licence is bundled.** Add one before treating this as redistributable beyond your own use.
+- **Portable mode is a compression, not a port.** Without the reference files an agent writes in the library's style but cannot quote specific prompts. For high-stakes work, use a host that reads files.
 
 ## Provenance
 
-Compiled from an iterative, conversation-driven engagement building a reusable AI creative production prompt library, then packaged into the standard Agent Skill format (`SKILL.md` + progressive-disclosure reference files) for reuse across projects.
+Compiled from an iterative, conversation-driven engagement building a reusable AI creative production prompt library, then packaged three ways — Claude Agent Skill (`SKILL.md`), universal agent instructions (`AGENTS.md`), and paste-anywhere portable prompts — for reuse across projects and hosts.

@@ -1,0 +1,57 @@
+# AI Creative OS
+
+> A versioned, model-agnostic prompt library for AI-driven creative production: brief → creative strategy and territories → art direction → design DNA and styleframes → image generation → video generation with camera and character continuity → storyboard → motion/edit/After Effects/sound → asset management and QA. Every prompt has a stable `[DOMAIN]-[NN]` ID. Read `llms-full.txt` to ingest the whole corpus in one request, or fetch individual parts below.
+
+This file is the map for agents that cannot clone the repository. If you are running from disk, read `AGENTS.md` (any agent) or `SKILL.md` (Claude) instead — they carry the same protocol.
+
+**How to use this map:** route the user's request to one pipeline stage, fetch only that stage's file, and answer in the abbreviated `STD-00` shape (`ID` · `PURPOSE` · `INPUTS` · one copyable prompt · `EXPECTED OUTPUT` · `QUALITY CHECK`). Tag every claim `[CONFIRMED]`, `[ASSUMPTION — reason]`, `[UNKNOWN]`, `[PROPOSED: value]`, `[LOCKED: value]`, or `[APPROVED: value — DEC-ID]`. Never present a guess as fact, and never contradict an approved or locked element.
+
+## Entry points
+
+- [AGENTS.md](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/AGENTS.md): Universal agent instructions (AGENTS.md standard) — protocol, routing table, status tags, guardrails.
+- [SKILL.md](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/SKILL.md): Claude Agent Skill entry point with front matter, ID registry, and usage conventions.
+- [README.md](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/README.md): What this is and how to install it in each host.
+
+## Core framework (8 parts)
+
+- [Part 1 — Research and model routing](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/reference/part-1-research-and-routing.md): Dated tool/model landscape, task routing matrix, starting stack, control limitations. Treat version claims as a snapshot and re-verify.
+- [Part 2 — Library structure and foundation](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/reference/part-2-library-structure-and-foundation.md): Project context (`CTX-00`), variables, prompt-entry standard (`STD-00`), master start prompt, handoff (`HND-00`), decision log (`DEC-00`), approvals, change requests, brief analysis (`BA-01`).
+- [Part 3 — Creative and art direction](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/reference/part-3-creative-art-direction.md): Creative Director territories (`CD-01`), Art Director visual language (`AD-01`), Reference Analyst (`RA-01`), Design Critic (`DC-01`), creative challenge, feedback interpretation.
+- [Part 4 — Design DNA and styleframes](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/reference/part-4-design-dna-styleframes.md): Design DNA (`DNA-00`/`DNA-01`), exploration (`DE-01`), styleframes (`SF-01`), controlled iteration (`CI-01`), motion-readiness (`MR-01`), design mentor.
+- [Part 5 — Image generation](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/reference/part-5-image-generation.md): Image spec (`IMG-00`), model adapters (`ADP-OAI/ADP-GGL/ADP-MJ/ADP-BFL/ADP-IDG/ADP-RCF/ADP-ADB`), core image prompts (`IP-01`–`IP-12`), character consistency (`CC-01`), generation checks (`IGC-01`/`IGC-02`).
+- [Part 6 — Video generation](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/reference/part-6-video-generation.md): Video spec (`VID-00`), video prompts (`VP-01`–`VP-16`), vendor adapters (`ADPV-RUN/KLG/GGL/LUM/SDC/ADB`), continuity checks (`VCC-01`), failure diagnosis (`VPD-01`).
+- [Part 7 — Storyboards, motion, editing, AE, sound](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/reference/part-7-storyboards-motion-editing-ae-sound.md): Storyboard (`SB-00`), motion direction (`MD-00`), editing (`ED-00`), design-to-AE (`AEB-00`), expressions (`AEX-00`), sound (`SND-*`).
+- [Part 8 — Asset management, QA, workflows](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/reference/part-8-asset-management-qa-workflows.md): Asset register (`ASM-01`), visual bible (`VB-00`–`VB-04`), continuity audit (`CTY-00`), QA pass (`QA-00`), end-to-end workflows (`WF-*`), cheat sheet, maintenance and versioning.
+
+## Prompt library
+
+- [prompts-only.md](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/prompts/prompts-only.md): Curated, copyable extract of the full 8-part library. Search by domain ID.
+- [standalone-prompts.md](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/prompts/standalone-prompts.md): The same prompts rewritten to be fully self-contained — no cross-references needed to use any single one.
+
+## Extensions
+
+- [Creator talking-head prompts](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/prompts/extensions/creator-talking-head-prompts.md): Talking-head / content-creator image and video prompts.
+- [Creator reference-locked prompts](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/prompts/extensions/creator-reference-locked-prompts.md): Identity locked to a real reference photo. **Requires documented consent from that person — not optional.**
+- [Creator standalone prompts](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/prompts/extensions/creator-prompts-standalone.md): Self-contained creator prompt set.
+- [UGC and avatar prompts](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/prompts/extensions/ugc-avatar-prompts.md): UGC-style stills and photoreal synthetic human/avatar prompts, with AI-disclosure guidance.
+
+## Portable mode (no file access)
+
+- [portable/README.md](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/portable/README.md): Which portable file to use, per host.
+- [portable/gemini-gem-instructions.md](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/portable/gemini-gem-instructions.md): Fit for a Gemini Gem's ~4,000-character instructions field.
+- [portable/chatgpt-instructions.md](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/portable/chatgpt-instructions.md): For ChatGPT custom instructions, Copilot, or a Cursor rule.
+- [portable/system-prompt.md](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/portable/system-prompt.md): Full system prompt for APIs, Custom GPTs, and Claude Projects.
+- [portable/mini-prompt.md](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/portable/mini-prompt.md): ~1,300 characters, for fields capped near 1,500.
+- [portable/kickoff-prompt.md](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/portable/kickoff-prompt.md): Paste-first message for a browsing web chat.
+
+## Optional
+
+- [llms-full.txt](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/llms-full.txt): The entire corpus — entry points, all 8 reference parts, both prompt extracts, extensions, and portable prompts — concatenated into one file for single-request ingestion. Large (~1 MB); prefer the individual parts unless you need everything at once.
+- [tools/check.sh](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/tools/check.sh): Verifies portable prompt character budgets, file references, and that `llms-full.txt` is current.
+
+## Notes for agents
+
+- No licence is bundled. Do not describe this repository as open-source or freely redistributable; tell the user to add a licence before publishing derived work.
+- Part 1's model and version claims are a dated research snapshot. Never present them as current fact — say what needs verifying.
+- Never approve creative or client work on the user's behalf. `QA-00` recommends pass/fail; the human decides.
+- Real-person likeness, synthetic humans, and deepfake-adjacent requests require documented consent and, in advertising, likely AI-disclosure. Ask before helping.

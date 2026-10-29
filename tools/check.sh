@@ -113,6 +113,23 @@ done
 [ "$guardrail_fail" -eq 0 ] && ok "consent / disclosure / verify guardrails present in every portable prompt"
 
 echo
+echo "6. Anti-blocking rule survived compression (dependencies, missing info)"
+block_fail=0
+for f in AGENTS.md SKILL.md portable/mini-prompt.md \
+         portable/gemini-gem-instructions.md portable/chatgpt-instructions.md \
+         portable/system-prompt.md portable/kickoff-prompt.md; do
+  if ! grep -qiE 'never block' "$f"; then
+    fail "$f lost the anti-blocking rule (\"never block\")"
+    block_fail=1
+  fi
+  if ! grep -qi 'skip' "$f"; then
+    fail "$f never mentions skipping a stage — dependency ladder incomplete"
+    block_fail=1
+  fi
+done
+[ "$block_fail" -eq 0 ] && ok "every surface tells the agent to skip a step rather than block the user"
+
+echo
 if [ "$FAIL" -eq 0 ]; then
   echo "All checks passed."
 else

@@ -18,6 +18,17 @@ Plus two machine-readable entry points for web agents: [`llms.txt`](llms.txt) (t
 
 `AGENTS.md`, `SKILL.md`, and the portable prompts say the same things on purpose. `tools/check.sh` keeps them honest.
 
+## How it handles missing information
+
+The prompts form a chain (brief → creative direction → art direction → design DNA → styleframes → image → video → storyboard/edit → QA), and most real requests arrive somewhere in the middle with the upstream work missing. **The chain is a map, not a gate.** Every surface of this repo — `AGENTS.md`, `SKILL.md`, and all five portable prompts — tells the agent to resolve a gap by this ladder:
+
+1. **Use what the user already said** — the missing element is usually implied in the conversation.
+2. **Reconstruct it inline** and label it `[PROPOSED]` / `[ASSUMPTION — reason]`. A provisional palette or character block is enough to write the requested prompt.
+3. **Ask at most one** follow-up question, with a default attached (`"if you'd rather not say, I'll assume 9:16 and a 35mm lens"`).
+4. **Otherwise skip that stage** — `[SKIPPED: stage — reason]` — carry the assumption, and deliver the thing that was actually asked for.
+
+Explicitly forbidden: a prerequisites checklist, "before we can do this you need to…", sending the user off to complete another prompt first, asking more than one question per turn, or returning a questionnaire instead of a deliverable. Skipping is normal and always visible; `tools/check.sh` fails if any surface loses this rule.
+
 ## Install, by host
 
 **Claude Code**
@@ -64,10 +75,10 @@ prompts/
   extensions/                  ← talking-head, reference-locked identity, creator set, UGC/avatar
 portable/
   README.md                    ← which file for which host
-  system-prompt.md             ← full system prompt (~5,600 chars)
-  gemini-gem-instructions.md   ← Gemini Gem fit (~3,150 chars)
-  chatgpt-instructions.md      ← ChatGPT / Copilot / Cursor (~3,100 chars)
-  mini-prompt.md               ← tiny fields (~1,400 chars)
+  system-prompt.md             ← full system prompt (~7,200 chars)
+  gemini-gem-instructions.md   ← Gemini Gem fit (~3,800 chars)
+  chatgpt-instructions.md      ← ChatGPT / Copilot / Cursor (~3,900 chars)
+  mini-prompt.md               ← tiny fields (~1,420 chars)
   kickoff-prompt.md            ← paste-first message for browsing chats
 tools/
   build.sh                     ← regenerate llms-full.txt

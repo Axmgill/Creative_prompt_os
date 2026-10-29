@@ -8,10 +8,10 @@ Same protocol, compressed to fit. No repository access required.
 
 | Your host | File | Field size |
 |---|---|---|
-| Gemini Gem (web) | [`gemini-gem-instructions.md`](gemini-gem-instructions.md) | ~3,150 chars (field allows ~4,000) |
-| ChatGPT custom instructions (paid) | [`chatgpt-instructions.md`](chatgpt-instructions.md) | ~3,100 chars (limit 5,000) |
-| ChatGPT custom instructions (free) | [`mini-prompt.md`](mini-prompt.md) | ~1,400 chars (limit 1,500) |
-| Custom GPT / Claude Project / API system prompt | [`system-prompt.md`](system-prompt.md) | ~5,600 chars (GPT limit 8,000) |
+| Gemini Gem (web) | [`gemini-gem-instructions.md`](gemini-gem-instructions.md) | ~3,800 chars (field allows ~4,000) |
+| ChatGPT custom instructions (paid) | [`chatgpt-instructions.md`](chatgpt-instructions.md) | ~3,900 chars (limit 5,000) |
+| ChatGPT custom instructions (free) | [`mini-prompt.md`](mini-prompt.md) | ~1,420 chars (limit 1,500) |
+| Custom GPT / Claude Project / API system prompt | [`system-prompt.md`](system-prompt.md) | ~7,200 chars (GPT limit 8,000) |
 | Copilot repo instructions, Cursor rule | [`chatgpt-instructions.md`](chatgpt-instructions.md) | no fixed cap |
 | Any tiny persona field | [`mini-prompt.md`](mini-prompt.md) | fits ~1,500 |
 | Web chat that can browse or fetch URLs | [`kickoff-prompt.md`](kickoff-prompt.md) | pasted per conversation |
@@ -45,6 +45,17 @@ Add `.cursor/rules/ai-creative-os.mdc` with `alwaysApply: true` in the front mat
 
 **Any API / agent framework**
 `system-prompt.md` → the system message. Attach `llms-full.txt` or individual reference parts as retrieval documents if you have a knowledge store.
+
+## Dependencies and missing information
+
+The library is a chain — brief → creative direction → art direction → design DNA → styleframes → image → video → storyboard/edit → QA — but **the chain is a map, not a gate**. Every portable prompt carries the same dependency ladder, in this order:
+
+1. Use what the user already said. The missing element is usually implied somewhere in the conversation.
+2. Reconstruct it inline and label it `[PROPOSED]` or `[ASSUMPTION — reason]`. A one-line provisional palette or character identity is enough to write the requested prompt.
+3. Ask **at most one** follow-up question, with a default attached so the user can ignore it entirely.
+4. If the gap remains, skip that stage — `[SKIPPED: stage — reason]` — and deliver what was actually asked for.
+
+What a portable prompt must never do: open with a prerequisites checklist, tell the user to go run another prompt first, send a questionnaire instead of a deliverable, or ask more than one question. That rule is the first item in every paste block here, and `tools/check.sh` fails if it goes missing.
 
 ## What portable mode gives up
 

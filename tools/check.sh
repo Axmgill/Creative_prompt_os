@@ -129,19 +129,151 @@ for f in AGENTS.md SKILL.md portable/mini-prompt.md \
 done
 [ "$block_fail" -eq 0 ] && ok "every surface tells the agent to skip a step rather than block the user"
 
-echo "7. Gemini bundle in dist/ is in sync"
-if [ ! -f dist/ai-creative-os-gemini.zip ]; then
-  fail "dist/ai-creative-os-gemini.zip missing — run tools/build-gemini-bundle.sh"
+echo "7. Gemini skill bundle in dist/ is in sync"
+if [ ! -f dist/ai-creative-os.zip ]; then
+  fail "dist/ai-creative-os.zip missing — run tools/build-gemini-skill.sh"
 else
-  before=$(git hash-object dist/ai-creative-os-gemini.zip)
-  bash tools/build-gemini-bundle.sh >/dev/null 2>&1 || fail "build-gemini-bundle.sh failed"
-  after=$(git hash-object dist/ai-creative-os-gemini.zip)
+  before=$(git hash-object dist/ai-creative-os.zip)
+  bash tools/build-gemini-skill.sh >/dev/null 2>&1 || fail "build-gemini-skill.sh failed"
+  after=$(git hash-object dist/ai-creative-os.zip)
   if [ "$before" = "$after" ]; then
-    ok "dist bundle matches its sources ($(( $(wc -c < dist/ai-creative-os-gemini.zip) / 1024 )) KB)"
+    ok "dist/ai-creative-os.zip matches its sources ($(( $(wc -c < dist/ai-creative-os.zip) / 1024 )) KB)"
   else
-    fail "Gemini bundle was stale — rebuilt in place; commit the result"
+    fail "Gemini skill bundle was stale — rebuilt in place; commit the result"
   fi
 fi
+
+echo
+echo "8. Gemini skill upload requirements (support.google.com/gemini p=pn_skills)"
+# Hard limits Google documents and enforces at upload time.
+python3 - "$FAIL" <<'PY_CHECK'
+import re, sys, zipfile, pathlib
+
+fail = 0
+def ok(m):   print(f"  ok    {m}")
+def bad(m):  global fail; fail = 1; print(f"  FAIL  {m}")
+
+md = pathlib.Path("SKILL.md")
+if not md.exists():
+    bad("SKILL.md missing from the main folder")
+    sys.exit(1)
+
+text = md.read_text(encoding="utf-8")
+m = re.match(r"^---\n(.*?)\n---\n", text, re.S)
+if not m:
+    bad("SKILL.md does not start with YAML frontmatter between --- delimiters")
+    sys.exit(1)
+fm = m.group(1)
+
+def field(name):
+    mm = re.search(rf"^{name}:\s*(.+)$", fm, re.M)
+    return mm.group(1).strip() if mm else None
+
+name = field("name")
+desc = field("description")
+lic  = field("license")
+
+# name: required, kebab-case, <=64, no leading/trailing/double hyphens
+if not name:
+    bad("frontmatter has no name")
+elif len(name) > 64:
+    bad(f"name is {len(name)} chars (limit 64)")
+elif not re.match(r"^[a-z0-9]+(-[a-z0-9]+)*$", name):
+    bad(f"name '{name}' is not kebab-case (lowercase letters, digits, single hyphens)")
+else:
+    ok(f"name '{name}' is kebab-case, {len(name)}/64 chars")
+
+# YAML safety: an unquoted ': ' or ' #' inside a plain scalar breaks parsing
+# on strict hosts (Gemini validates frontmatter before accepting an upload).
+yaml_issues = []
+for line in fm.splitlines():
+    if not line.strip() or line.startswith((" ", "\t")):
+        continue
+    k, _, v = line.partition(":")
+    if ": " in v:
+        yaml_issues.append(f"{k.strip()}: unquoted ': ' in value")
+    if " #" in v:
+        yaml_issues.append(f"{k.strip()}: ' #' starts a YAML comment")
+if yaml_issues:
+    bad("frontmatter is not YAML-safe: " + "; ".join(yaml_issues))
+else:
+    ok("frontmatter is YAML-safe (no unquoted ': ' or ' #')")
+
+# description: required, 1..1024
+if not desc:
+    bad("frontmatter has no description")
+elif len(desc) > 1024:
+    bad(f"description is {len(desc)} chars (hard limit 1024)")
+else:
+    ok(f"description is {len(desc)}/1024 chars")
+
+# license: optional, but must not be empty if present
+if lic is not None and not lic:
+    bad("license is present but empty")
+elif lic:
+    ok(f"license present ({len(lic)}/1024 chars)")
+
+zpath = pathlib.Path("dist/ai-creative-os.zip")
+if not zpath.exists():
+    bad("dist/ai-creative-os.zip missing")
+else:
+    with zipfile.ZipFile(zpath) as z:
+        names = [n for n in z.namelist() if not n.endswith("/")]
+        # exactly one SKILL.md, in the root or a single wrapper folder
+        skill_md = [n for n in names if n.split("/")[-1] == "SKILL.md"]
+        if len(skill_md) != 1:
+            bad(f"expected exactly one SKILL.md in the zip, found {len(skill_md)}")
+        else:
+            parts = skill_md[0].split("/")
+            if len(parts) == 2:
+                ok(f"SKILL.md sits in the main folder ({skill_md[0]})")
+            elif len(parts) == 1:
+                ok("SKILL.md sits at the archive root")
+            else:
+                bad(f"SKILL.md is nested too deep ({skill_md[0]}) — must be in the main folder")
+
+        # the wrapper folder name must equal the skill name
+        tops = {n.split("/")[0] for n in names}
+        if len(tops) == 1 and name and tops == {name}:
+            ok(f"folder '{name}' matches the skill name")
+        elif len(tops) == 1:
+            bad(f"folder '{sorted(tops)[0]}' does not match skill name '{name}'")
+        else:
+            bad(f"expected one top-level folder, found {len(tops)}: {sorted(tops)[:4]}")
+
+        # supported file types only
+        allowed = {".md", ".markdown", ".txt", ".rst", ".csv", ".json", ".yaml",
+                   ".yml", ".py", ".sh", ".html", ".css", ".pdf", ".jpg", ".png"}
+        bad_types, junk = set(), []
+        for n in names:
+            ext = pathlib.PurePosixPath(n).suffix.lower()
+            if ext not in allowed:
+                bad_types.add(ext or "(none)")
+            if pathlib.PurePosixPath(n).name in (".DS_Store",) or ext == ".pyc":
+                junk.append(n)
+        if bad_types:
+            bad(f"unsupported file types in zip: {sorted(bad_types)}")
+        else:
+            ok("only supported file types (plain text / markdown)")
+        if junk:
+            bad(f"junk files that break uploads: {junk}")
+        else:
+            ok("no .DS_Store / .pyc junk")
+
+        # size, count, nesting
+        if len(names) > 100:
+            bad(f"{len(names)} files (limit 100)")
+        else:
+            ok(f"{len(names)} files (limit 100)")
+        depth = max(len(pathlib.PurePosixPath(n).parts) for n in names)
+        if depth > 11:
+            bad(f"nesting depth {depth} (limit 10 below the skill root)")
+        else:
+            ok(f"nesting depth {depth} (limit 10)")
+
+sys.exit(fail)
+PY_CHECK
+[ $? -eq 0 ] || FAIL=1
 
 echo
 if [ "$FAIL" -eq 0 ]; then

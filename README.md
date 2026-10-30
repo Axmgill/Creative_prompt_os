@@ -12,7 +12,7 @@ The library carries its own protocol in plain Markdown rather than relying on on
 |---|---|---|
 | Universal agent instructions | [`AGENTS.md`](AGENTS.md) | Codex, Cursor, GitHub Copilot, Gemini CLI, Jules, Amp, VS Code, Devin, Factory — the `AGENTS.md` standard, stewarded by the Agentic AI Foundation at the Linux Foundation |
 | Claude Agent Skill | [`SKILL.md`](SKILL.md) | Claude Code, Claude.ai skills, and any host that implements `SKILL.md` (Codex and Cursor also read it) |
-| Portable mode | [`portable/`](portable/) | Gemini Gems, ChatGPT, Copilot chat, Claude Projects, any API — hosts with no file access |
+| Portable mode | [`portable/`](portable/) | Gemini skills/Gems *instructions* fields, ChatGPT, Copilot chat, Claude Projects, any API — hosts with no file access |
 
 Plus two machine-readable entry points for web agents: [`llms.txt`](llms.txt) (the map) and [`llms-full.txt`](llms-full.txt) (the whole corpus in one file).
 
@@ -46,9 +46,15 @@ Claude discovers `SKILL.md` and loads the reference files on demand.
 - Cursor: auto-reads `AGENTS.md`; if you prefer `.cursor/rules/`, copy [`portable/chatgpt-instructions.md`](portable/chatgpt-instructions.md)'s block into a rule with `alwaysApply: true`.
 - Copilot: reads `AGENTS.md`; `.github/copilot-instructions.md` also works with the same block.
 
-**Gemini on the web (a Gem)** — fastest route is the ready-made bundle: **[download `ai-creative-os-gemini.zip`](https://github.com/Axmgill/Creative_prompt_os/raw/main/dist/ai-creative-os-gemini.zip)** (153 KB), unzip it, then follow `0-READ-ME-FIRST.txt`: paste `1-PASTE-INTO-GEM-INSTRUCTIONS.txt` into a new Gem's Instructions, and upload the six files in `2-upload-as-knowledge/` as Knowledge. About three minutes.
+**Gemini on the web (a skill — the current route)** — download **[`ai-creative-os.zip`](https://github.com/Axmgill/Creative_prompt_os/raw/main/dist/ai-creative-os.zip)** (365 KB) and upload it directly:
 
-Doing it by hand instead: Gems → New Gem → Instructions ← [`portable/gemini-gem-instructions.md`](portable/gemini-gem-instructions.md); Knowledge ← `SKILL.md`, `prompts/standalone-prompts.md`, and the `reference/part-*.md` files you use.
+1. gemini.google.com → **Customize** (under *More* if hidden) → **Skills**
+2. **Create** → **Upload** → pick the `.zip` (or the unzipped folder)
+3. Review, then **Create**
+
+The package meets Gemini's upload rules: `SKILL.md` sits in the main folder, the folder is named `ai-creative-os` to match the skill name, the name is kebab-case, the description is 708/1024 characters, and it contains only plain-text files. Invoke it with `/ai-creative-os`, or just describe the job and Gemini matches it.
+
+Google is replacing Gems with skills (from November 2026 for personal accounts), so this is the route that lasts. The same folder still works as a Gem: create one and upload `reference/` and `prompts/` as knowledge.
 
 **Gemini on the web (no Gem, just a chat)** — paste [`portable/kickoff-prompt.md`](portable/kickoff-prompt.md) as your first message and let it fetch `llms.txt`. Or give it `https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/llms-full.txt` for the whole library in one URL.
 
@@ -78,16 +84,16 @@ prompts/
 portable/
   README.md                    ← which file for which host
   system-prompt.md             ← full system prompt (~7,200 chars)
-  gemini-gem-instructions.md   ← Gemini Gem fit (~3,800 chars)
+  gemini-gem-instructions.md   ← Gemini skill/Gem instructions (~3,800 chars)
   chatgpt-instructions.md      ← ChatGPT / Copilot / Cursor (~3,900 chars)
   mini-prompt.md               ← tiny fields (~1,420 chars)
   kickoff-prompt.md            ← paste-first message for browsing chats
 tools/
   build.sh                     ← regenerate llms-full.txt
-  build-gemini-bundle.sh       ← regenerate dist/ai-creative-os-gemini.zip
-  check.sh                     ← verify budgets, paths, corpus and bundle freshness
+  build-gemini-skill.sh        ← regenerate dist/ai-creative-os.zip
+  check.sh                     ← verify budgets, paths, corpus, bundle and Gemini upload rules
 dist/
-  ai-creative-os-gemini.zip    ← download-and-go Gemini Gem bundle (153 KB)
+  ai-creative-os.zip           ← upload-ready Gemini skill package (365 KB)
 ```
 
 Every prompt carries a stable `[DOMAIN]-[NN]` ID (`CD-01`, `IP-05`, `VP-07`, `QA-00`, …) so routing works the same no matter which host is reading it.

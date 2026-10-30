@@ -20,15 +20,12 @@ Each file contains one fenced block. **Copy the contents of the block only** —
 
 ## Install, by host
 
-**Gemini (web) — the Gem route**
-Shortcut: [download the Gemini bundle](https://github.com/Axmgill/Creative_prompt_os/raw/main/dist/ai-creative-os-gemini.zip) — it contains the instruction text already stripped of code fences plus the knowledge files, with a read-me. Build it yourself with `tools/build-gemini-bundle.sh`.
+**Gemini (web) — upload the skill package**
+The current route is a skill, not a Gem. [Download `ai-creative-os.zip`](https://github.com/Axmgill/Creative_prompt_os/raw/main/dist/ai-creative-os.zip) (365 KB), then: Customize → Skills → Create → Upload → pick the zip. It already satisfies Gemini's rules — `SKILL.md` in the main folder, folder named to match the kebab-case skill name, plain-text files only. Rebuild it with `tools/build-gemini-skill.sh`.
 
-1. Gemini → Gems → New Gem → name it `AI Creative OS`.
-2. Instructions ← paste `gemini-gem-instructions.md`.
-3. Knowledge ← upload `SKILL.md`, `prompts/standalone-prompts.md`, and the `reference/part-*.md` files for the stages you actually use (part-3, part-5, part-6 are the highest value).
-4. Save and use the Gem for creative work.
+The older Gem route still works until Google retires Gems (November 2026 for personal accounts): Gems → New Gem → Instructions ← the block in `gemini-gem-instructions.md`; Knowledge ← `SKILL.md` plus the reference parts you use.
 
-**Gemini (web) — no Gem, just a chat**
+**Gemini (web) — just a chat**
 Paste `kickoff-prompt.md` as your first message; Gemini will fetch `llms.txt` and the part it needs. Works when browsing is enabled; degrades if a fetch is blocked.
 
 **ChatGPT**

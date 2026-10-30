@@ -21,6 +21,8 @@ Each file contains one fenced block. **Copy the contents of the block only** —
 ## Install, by host
 
 **Gemini (web) — the Gem route**
+Shortcut: [download the Gemini bundle](https://github.com/Axmgill/Creative_prompt_os/raw/main/dist/ai-creative-os-gemini.zip) — it contains the instruction text already stripped of code fences plus the knowledge files, with a read-me. Build it yourself with `tools/build-gemini-bundle.sh`.
+
 1. Gemini → Gems → New Gem → name it `AI Creative OS`.
 2. Instructions ← paste `gemini-gem-instructions.md`.
 3. Knowledge ← upload `SKILL.md`, `prompts/standalone-prompts.md`, and the `reference/part-*.md` files for the stages you actually use (part-3, part-5, part-6 are the highest value).

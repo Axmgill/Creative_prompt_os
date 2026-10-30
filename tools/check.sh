@@ -129,6 +129,20 @@ for f in AGENTS.md SKILL.md portable/mini-prompt.md \
 done
 [ "$block_fail" -eq 0 ] && ok "every surface tells the agent to skip a step rather than block the user"
 
+echo "7. Gemini bundle in dist/ is in sync"
+if [ ! -f dist/ai-creative-os-gemini.zip ]; then
+  fail "dist/ai-creative-os-gemini.zip missing — run tools/build-gemini-bundle.sh"
+else
+  before=$(git hash-object dist/ai-creative-os-gemini.zip)
+  bash tools/build-gemini-bundle.sh >/dev/null 2>&1 || fail "build-gemini-bundle.sh failed"
+  after=$(git hash-object dist/ai-creative-os-gemini.zip)
+  if [ "$before" = "$after" ]; then
+    ok "dist bundle matches its sources ($(( $(wc -c < dist/ai-creative-os-gemini.zip) / 1024 )) KB)"
+  else
+    fail "Gemini bundle was stale — rebuilt in place; commit the result"
+  fi
+fi
+
 echo
 if [ "$FAIL" -eq 0 ]; then
   echo "All checks passed."

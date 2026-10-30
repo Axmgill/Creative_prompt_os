@@ -35,6 +35,10 @@ This file is the map for agents that cannot clone the repository. If you are run
 - [Creator standalone prompts](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/prompts/extensions/creator-prompts-standalone.md): Self-contained creator prompt set.
 - [UGC and avatar prompts](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/prompts/extensions/ugc-avatar-prompts.md): UGC-style stills and photoreal synthetic human/avatar prompts, with AI-disclosure guidance.
 
+## Upload-ready packages
+
+- [dist/ai-creative-os.zip](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/dist/ai-creative-os.zip): The whole skill as an upload-ready Gemini skill package — `SKILL.md` in the main folder, folder named `ai-creative-os` to match the kebab-case skill name, plain-text files only, 24 files / 365 KB. Upload at gemini.google.com → Customize → Skills → Create → Upload.
+
 ## Portable mode (no file access)
 
 - [portable/README.md](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/portable/README.md): Which portable file to use, per host.

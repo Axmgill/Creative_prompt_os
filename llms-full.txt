@@ -201,7 +201,11 @@ Tell the user which of these you used, so they know the agent has the reduced ve
 ---
 name: ai-creative-os
 description: A complete, model-agnostic prompt-engineering operating system for AI-driven creative production — creative strategy/concept territories, art direction, design DNA and styleframes, image generation, video generation and camera/character continuity, storyboarding, motion/editing/AE/sound, and asset management & QA. Use this skill whenever the user wants to develop a creative concept or campaign territory, write or refine an AI image/video generation prompt, lock a character/visual-identity reference for consistency across shots, build a storyboard, route a task to the right current AI tool, or run a production QA pass — and wants a structured, reusable, versioned prompt rather than an ad-hoc one-off.
-license: See repository LICENSE / owner's terms. No license is bundled by default — add one before redistributing.
+license: Proprietary. No licence is bundled with this skill package; add one before redistributing or publishing derived work.
+metadata:
+  version: "1.1"
+  author: Axmgill
+  homepage: https://github.com/Axmgill/Creative_prompt_os
 ---
 
 # AI Creative Operating System
@@ -213,8 +217,13 @@ A versioned library of reusable prompt "roles" for running an AI-assisted creati
 - **`AGENTS.md`** — the universal entry point, written to the `AGENTS.md` standard (Codex, Cursor, GitHub Copilot, Gemini CLI, Jules, Amp, VS Code, Devin, Factory read it natively).
 - **`portable/`** — paste-ready versions for hosts with no file access: Gemini Gems, ChatGPT, Copilot chat, Claude Projects, any API system prompt.
 - **`llms.txt` / `llms-full.txt`** — for web agents that can fetch one URL but cannot browse a repo.
+- **Gemini skills** — this folder is itself a valid Gemini skill package: `SKILL.md` at the main folder, kebab-case name matching the folder, plain-text files only. Upload the folder or `dist/ai-creative-os.zip` at gemini.google.com → Customize → Skills → Create → Upload.
 
 If you are Claude, keep reading; this file is your entry point.
+
+## Provenance and trust
+
+Every file in this skill package is original content written for this library. There are no third-party, scraped, or auto-downloaded files, no executables or scripts that call the network, no binaries, no credentials, and no personal data. The only external references are plain URLs quoted in Part 1's research notes for verification. If you received this package from anywhere other than <https://github.com/Axmgill/Creative_prompt_os>, verify it before uploading it to any assistant.
 
 ## When to use this skill
 

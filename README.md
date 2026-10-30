@@ -46,7 +46,9 @@ Claude discovers `SKILL.md` and loads the reference files on demand.
 - Cursor: auto-reads `AGENTS.md`; if you prefer `.cursor/rules/`, copy [`portable/chatgpt-instructions.md`](portable/chatgpt-instructions.md)'s block into a rule with `alwaysApply: true`.
 - Copilot: reads `AGENTS.md`; `.github/copilot-instructions.md` also works with the same block.
 
-**Gemini on the web (a Gem)** — Gems → New Gem → Instructions ← [`portable/gemini-gem-instructions.md`](portable/gemini-gem-instructions.md); Knowledge ← `SKILL.md`, `prompts/standalone-prompts.md`, and the `reference/part-*.md` files you use. About three minutes; step-by-step in [`portable/README.md`](portable/README.md).
+**Gemini on the web (a Gem)** — fastest route is the ready-made bundle: **[download `ai-creative-os-gemini.zip`](https://github.com/Axmgill/Creative_prompt_os/raw/main/dist/ai-creative-os-gemini.zip)** (153 KB), unzip it, then follow `0-READ-ME-FIRST.txt`: paste `1-PASTE-INTO-GEM-INSTRUCTIONS.txt` into a new Gem's Instructions, and upload the six files in `2-upload-as-knowledge/` as Knowledge. About three minutes.
+
+Doing it by hand instead: Gems → New Gem → Instructions ← [`portable/gemini-gem-instructions.md`](portable/gemini-gem-instructions.md); Knowledge ← `SKILL.md`, `prompts/standalone-prompts.md`, and the `reference/part-*.md` files you use.
 
 **Gemini on the web (no Gem, just a chat)** — paste [`portable/kickoff-prompt.md`](portable/kickoff-prompt.md) as your first message and let it fetch `llms.txt`. Or give it `https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/llms-full.txt` for the whole library in one URL.
 
@@ -82,7 +84,10 @@ portable/
   kickoff-prompt.md            ← paste-first message for browsing chats
 tools/
   build.sh                     ← regenerate llms-full.txt
-  check.sh                     ← verify budgets, paths, and corpus freshness
+  build-gemini-bundle.sh       ← regenerate dist/ai-creative-os-gemini.zip
+  check.sh                     ← verify budgets, paths, corpus and bundle freshness
+dist/
+  ai-creative-os-gemini.zip    ← download-and-go Gemini Gem bundle (153 KB)
 ```
 
 Every prompt carries a stable `[DOMAIN]-[NN]` ID (`CD-01`, `IP-05`, `VP-07`, `QA-00`, …) so routing works the same no matter which host is reading it.

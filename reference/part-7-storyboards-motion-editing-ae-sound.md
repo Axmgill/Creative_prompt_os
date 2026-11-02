@@ -1,6 +1,8 @@
 # AI Creative Operating System — Part 7: Storyboards, Motion Design, Editing, After Effects and Sound
 
-**Builds on:** Parts 1–6 (routing, `STD-00` prompt standard, art direction, `DNA-00`/`MR-01`, `IMG-00`/`REF-01`/`CC-01`/`PC-01`, `VID-00`/video adapters). This part builds **prompts and planning documents only** — it does not edit timelines, create project files, run code, or inspect footage unless explicitly requested and actually performed.
+**Builds on:** Parts 1–6 and 9 (routing, `STD-00` prompt standard, art direction, `DNA-00`/`MR-01`, `IMG-00`/`REF-01`/`CC-01`/`PC-01`, `VID-00`/video adapters, `TECH-00` technical craft). This part builds **prompts and planning documents only** — it does not edit timelines, create project files, run code, or inspect footage unless explicitly requested and actually performed.
+
+**Technical craft inheritance:** Storyboard, motion, edit, AE, and export plans inherit `TECH-03` from Part 9 for timing, easing, layer structure, transitions, parallax, audio sync, and delivery settings. If the user does not know motion/edit terminology, choose labelled defaults and explain them briefly.
 
 **New domain codes** (under `/Library/07_Production/`): `RB` (role boundaries), `SB` (storyboard), `MD` (motion director), `ED` (short-form editor), `AEB` (AE build planner), `AEX` (AE expression engineer), `AES` (AE script dev/debug), `SUP` (supporting production prompts), `SND` (sound/voice), `PR` (production review).
 

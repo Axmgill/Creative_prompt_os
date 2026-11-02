@@ -8,6 +8,8 @@
 
 These are newly written for this request (not pulled from the original 8-part library), but they follow the same format and reuse the library's identity-consistency approach (`CC-01`-style) if you need the same creator to recur across multiple images.
 
+**Technical craft (Part 9):** Inherit `TECH-00` from `reference/part-9-technical-craft-and-glossary.md`. If the user has not supplied camera, lens, angle, lighting, movement, easing, frame-rate, or export terms, auto-select one coherent technical package, label it `[DEFAULT]`/`[PROPOSED]`, and add one plain-English "Why" line. Do not ask the user to learn jargon. Camera/lens terms are AI look cues, not real camera metadata. Preserve consent, identity, brand, and other locked requirements.
+
 ---
 
 ## Photorealism Reinforcement Block (use in every prompt below)

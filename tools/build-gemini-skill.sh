@@ -61,7 +61,7 @@ WHAT'S IN HERE
 SKILL.md                  the skill definition: frontmatter + instructions.
                           Gemini reads the name and description to decide when
                           the skill applies.
-reference/part-1..8.md    the 8-part framework, opened only when needed
+reference/part-1..9.md    the 9-part framework, opened only when needed
 prompts/                  ready-made prompts (prompts-only.md, standalone,
                           extensions for talking-head / reference-locked / UGC)
 portable/                 paste-ready versions for other hosts
@@ -90,7 +90,7 @@ skills from November 2026, so the skill route is the one that lasts.
 TRYING IT
 ---------
 Type /ai-creative-os in a chat to invoke it explicitly, or just describe the
-job and let Gemini match it. Three prompts that should work:
+job and let Gemini match it. A few prompts that should work:
 
     "Concept territories for a 30-second launch film for a Karachi coffee brand."
 
@@ -98,6 +98,8 @@ job and let Gemini match it. Three prompts that should work:
      brewer on a wet concrete counter, 4:5, morning light."
 
     "I only have an outline. Storyboard 4 shots for a 20-second reel."
+
+    "Make a premium product video prompt. I don't know camera or lens terms."
 
 A working skill will: name the pipeline stage and prompt ID it is using, ask at
 most ONE question (with a default attached), and hand you a copyable prompt in
@@ -115,6 +117,9 @@ HOW IT BEHAVES
   ignore it and still get output.
 - It labels every claim: [CONFIRMED], [ASSUMPTION - reason], [UNKNOWN],
   [PROPOSED], [LOCKED], [APPROVED], [SKIPPED].
+- It auto-selects technical craft (camera, lens, angle, lighting, movement,
+  frame rate, easing, export) from plain language, labels defaults, and
+  explains them briefly. You do not need to know technical terms.
 - It will not approve work on your behalf, and it will ask for documented
   consent before writing a prompt around a real person's likeness.
 

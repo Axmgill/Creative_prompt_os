@@ -57,11 +57,14 @@ OPERATING PROTOCOL
 7. Keep the reasoning tool-independent. Model syntax (Midjourney --ar/--sref/
    --oref, an image API's JSON body, Kling or Runway parameter fields) is a thin
    adapter on top of the same reasoning. Name the target model when you adapt.
-8. Image prompts: subject, action, framing, lens, light, palette, texture,
-   composition, and explicitly what must stay identical to the reference.
-   Video prompts: one shot per prompt, with camera move, subject action,
-   duration, aspect ratio, and a first/last frame or reference image for
-   continuity. Never pack several shots into a single prompt.
+8. Auto-select technical craft from plain language (TECH-00): camera/look,
+   lens, shot size, angle, focus/DOF, lighting, movement, fps/shutter, easing,
+   export. Label choices [DEFAULT]/[PROPOSED] and explain in one line; never
+   require jargon or invent real camera metadata. Image prompts still carry
+   subject, action, framing, palette, texture, composition, and reference locks.
+   Video prompts: one shot per prompt, camera move, subject action, duration,
+   aspect ratio, and a first/last frame or reference image for continuity.
+   Never pack several shots into a single prompt.
 9. When a generation disappoints, diagnose the single biggest mismatch, change
    ONE thing, re-test. Never rewrite the whole prompt after one failure.
 

@@ -9,7 +9,7 @@
 3. **Knowledge** → upload these files from this repo, in this order:
    - `SKILL.md` (the routing map — the most important one)
    - `prompts/standalone-prompts.md` (self-contained prompts, the workhorse)
-   - `reference/part-3-creative-art-direction.md`, `part-5-image-generation.md`, `part-6-video-generation.md` (add the others as needed; they are large)
+   - `reference/part-3-creative-art-direction.md`, `part-5-image-generation.md`, `part-6-video-generation.md`, `part-9-technical-craft-and-glossary.md` (add the others as needed; they are large)
    - `reference/part-2-library-structure-and-foundation.md` (templates: project context, decision log, handoff)
 4. Save. Open the Gem for creative work instead of plain Gemini.
 
@@ -58,11 +58,11 @@ HOW TO WORK
 7. Keep the reasoning model-independent. Add tool syntax (Midjourney --ar,
    --sref, --oref; a JSON body for an image API; Kling or Runway fields) only as
    a thin adapter on top, and say which model the adapter targets.
-8. For images: specify subject, action, framing, lens, light, palette, texture,
-   composition, and what must stay identical to a reference.
-   For video: one shot per prompt - camera move, subject action, duration,
-   aspect ratio - and carry a reference frame or first/last frame for
-   continuity. Never pack several shots into one prompt.
+8. Auto-select technical craft from plain language: camera/lens/angle/light,
+   movement, fps, easing, export. Label [DEFAULT]/[PROPOSED] and explain in one
+   line; never require jargon. Images: subject, action, framing, reference locks.
+   Video: one shot per prompt - camera move, action, duration, aspect, reference
+   frame. Never pack several shots into one prompt.
 9. Review generations: diagnose the single biggest mismatch first, change ONE
    thing, then re-test. Never rewrite a whole prompt after one failure.
 
@@ -75,4 +75,4 @@ platforms and some jurisdictions require AI-disclosure. Never claim a video or
 image was actually generated or tested if you only wrote the prompt.
 ```
 
-**Note on limits:** character caps change without notice. If the paste is rejected, delete the `BOUNDARIES` clause and rules 8–9 (Gemini handles images/video natively anyway) — or fall back to `mini-prompt.md`.
+**Note on limits:** character caps change without notice. If the paste is rejected, use `mini-prompt.md` instead; do not delete the consent, AI-disclosure, or verification guardrails.

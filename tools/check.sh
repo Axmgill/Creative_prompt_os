@@ -8,6 +8,9 @@
 #   2. Every portable prompt's copyable block fits its host's character limit.
 #   3. Every repo path referenced by AGENTS.md / llms.txt actually exists.
 #   4. llms-full.txt is in sync with its sources.
+#   5-6. Guardrails and anti-blocking rules survived compression.
+#   7-8. Gemini skill bundle is in sync and upload-legal.
+#   9. Technical-craft auto-selection survived compression.
 set -uo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -274,6 +277,31 @@ else:
 sys.exit(fail)
 PY_CHECK
 [ $? -eq 0 ] || FAIL=1
+
+echo
+echo "9. Technical-craft auto-selection survived compression (camera, lens, angle)"
+tech_fail=0
+for f in AGENTS.md SKILL.md portable/mini-prompt.md \
+         portable/gemini-gem-instructions.md portable/chatgpt-instructions.md \
+         portable/system-prompt.md portable/kickoff-prompt.md; do
+  if ! grep -qi 'camera' "$f"; then
+    fail "$f lost camera/look auto-selection"
+    tech_fail=1
+  fi
+  if ! grep -qi 'lens' "$f"; then
+    fail "$f lost lens auto-selection"
+    tech_fail=1
+  fi
+  if ! grep -qi 'angle' "$f"; then
+    fail "$f lost angle auto-selection"
+    tech_fail=1
+  fi
+  if ! grep -qiE 'auto-(select|pick|selection)|TECH-00' "$f"; then
+    fail "$f mentions camera terms but lost the auto-selection rule"
+    tech_fail=1
+  fi
+done
+[ "$tech_fail" -eq 0 ] && ok "every surface auto-selects camera/look, lens, and angle from plain language"
 
 echo
 if [ "$FAIL" -eq 0 ]; then

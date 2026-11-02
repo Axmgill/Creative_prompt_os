@@ -21,6 +21,7 @@ FILES=(
   "reference/part-6-video-generation.md"
   "reference/part-7-storyboards-motion-editing-ae-sound.md"
   "reference/part-8-asset-management-qa-workflows.md"
+  "reference/part-9-technical-craft-and-glossary.md"
   "prompts/prompts-only.md"
   "prompts/standalone-prompts.md"
   "prompts/extensions/creator-talking-head-prompts.md"
@@ -47,7 +48,7 @@ trap 'rm -f "$BUILT"' EXIT
 
 > Single-file edition of the AI Creative OS prompt library, for agents that can
 > fetch one URL but cannot browse a repository. It concatenates the entry
-> points, the 8-part reference framework, both prompt extracts, the extension
+> points, the 9-part reference framework, both prompt extracts, the extension
 > prompt sets, and the portable prompts.
 >
 > House rules that apply throughout: route to one stage before answering; ask

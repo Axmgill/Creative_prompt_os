@@ -6,6 +6,8 @@
 
 They follow the same `STD-00` shape as the original library (ID, Purpose, Required Inputs, Prompt, Expected Output, Quality Check, Follow-ups) and reuse the original library's conventions where relevant (`REF-01` reference roles, `CC-01` consistency checks). They have **not** been tested against specific model adapters the way the original library's prompts were — treat the bracketed model suggestions as starting points, not verified routing.
 
+**Technical craft (Part 9):** Inherit `TECH-00` from `reference/part-9-technical-craft-and-glossary.md`. If the user has not supplied camera, lens, angle, lighting, movement, easing, frame-rate, or export terms, auto-select one coherent technical package, label it `[DEFAULT]`/`[PROPOSED]`, and add one plain-English "Why" line. Do not ask the user to learn jargon. Camera/lens terms are AI look cues, not real camera metadata. Preserve consent, identity, brand, and other locked requirements.
+
 **A compliance note that applies to every prompt below (read once, applies throughout):** Synthetic "UGC" and "digital human/avatar" content sits in an area with real legal and platform-policy exposure:
 - If an avatar/digital human is meant to be **fully synthetic** (no real person behind it), say so explicitly in the prompt and verify the output doesn't accidentally resemble an identifiable real person (especially a public figure) before using it in paid media.
 - If it's based on a **real person's likeness**, you need that person's documented consent before generating or using the content — this is not something the image model can verify for you.

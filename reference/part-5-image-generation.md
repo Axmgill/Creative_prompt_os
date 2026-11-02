@@ -46,6 +46,9 @@ ACTION / POSE:            [required if a figure/character is present, else N/A]
 ENVIRONMENT:              [required unless isolated-asset/transparent background]
 COMPOSITION:              [required]
 FRAMING / VIEWPOINT:      [required]
+TECHNICAL DIRECTION:      [required for photoreal/cinematic — auto-select via
+                         TECH-00: camera/look cue, lens/focal feel, angle,
+                         focus/DOF, lighting, color/finish; N/A for flat/vector]
 LIGHTING:                 [optional — inherited from DESIGN_DNA if one exists]
 COLOR:                    [optional — inherited from DESIGN_DNA if one exists]
 MATERIALS / TEXTURE:      [optional — inherited from DESIGN_DNA/ART_DIRECTION]
@@ -59,6 +62,8 @@ ASPECT RATIO:             [required]
 OUTPUT NEEDS:             [required — file type, resolution, background transparency, etc.]
 ACCEPTANCE CRITERIA:      [required]
 ```
+
+**Technical craft auto-selection:** For photoreal/cinematic image prompts, run `TECH-00` from Part 9 before finalizing `IMG-00`. If the user does not know camera/lens/angle terms, choose a coherent default package, label it `[DEFAULT]`/`[PROPOSED]`, and explain it in one line. For flat/vector/icon/UI work, mark literal camera/lens fields `N/A` and use composition/hierarchy instead.
 
 **Camera/lens language — when it helps vs. when it's unsupported precision:**
 - Helps for photoreal lifestyle, product hero, fashion editorial, storyboard-as-live-action: terms like "eye-level," "shallow depth of field," "wide-angle" describe a *visible result* these models were trained on real photography to reproduce.

@@ -2,6 +2,8 @@
 
 Each prompt below is fully self-contained — copy the whole code block, nothing else needed.
 
+**Technical craft (Part 9):** Inherit `TECH-00` from `reference/part-9-technical-craft-and-glossary.md`. If the user has not supplied camera, lens, angle, lighting, movement, easing, frame-rate, or export terms, auto-select one coherent technical package, label it `[DEFAULT]`/`[PROPOSED]`, and add one plain-English "Why" line. Do not ask the user to learn jargon. Camera/lens terms are AI look cues, not real camera metadata. Preserve consent, identity, brand, and other locked requirements.
+
 ---
 
 ## 1. Master Creator Talking-Head Template

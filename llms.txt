@@ -38,7 +38,7 @@ This file is the map for agents that cannot clone the repository. If you are run
 
 ## Upload-ready packages
 
-- [dist/ai-creative-os.zip](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/dist/ai-creative-os.zip): The whole skill as an upload-ready Gemini skill package — `SKILL.md` in the main folder, folder named `ai-creative-os` to match the kebab-case skill name, plain-text files only, 25 files / ~393 KB. Upload at gemini.google.com → Customize → Skills → Create → Upload.
+- [dist/ai-creative-os.zip](https://raw.githubusercontent.com/Axmgill/Creative_prompt_os/main/dist/ai-creative-os.zip): The whole skill as a Gemini skill download bundle — `SKILL.md` in the main folder, folder named `ai-creative-os` to match the kebab-case skill name, plain-text files only, 25 files / ~394 KB. Unzip it and upload the `ai-creative-os` folder at gemini.google.com → Customize → Skills → Create → Upload; some Gemini surfaces reject direct `.zip` uploads.
 
 ## Portable mode (no file access)
 

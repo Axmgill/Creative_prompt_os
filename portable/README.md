@@ -20,8 +20,10 @@ Each file contains one fenced block. **Copy the contents of the block only** —
 
 ## Install, by host
 
-**Gemini (web) — upload the skill package**
-The current route is a skill, not a Gem. [Download `ai-creative-os.zip`](https://github.com/Axmgill/Creative_prompt_os/raw/main/dist/ai-creative-os.zip) (~393 KB), then: Customize → Skills → Create → Upload → pick the zip. It already satisfies Gemini's rules — `SKILL.md` in the main folder, folder named to match the kebab-case skill name, plain-text files only. Rebuild it with `tools/build-gemini-skill.sh`.
+**Gemini (web) — upload the skill folder**
+The current route is a skill, not a Gem. [Download `ai-creative-os.zip`](https://github.com/Axmgill/Creative_prompt_os/raw/main/dist/ai-creative-os.zip) (~394 KB), **unzip it**, then: Customize → Skills → Create → Upload → pick the unzipped `ai-creative-os` folder. Some Gemini surfaces/accounts reject `.zip` uploads, so the folder is the reliable upload unit. It satisfies Gemini's rules — `SKILL.md` in the main folder, folder named to match the kebab-case skill name, plain-text files only. Rebuild it with `tools/build-gemini-skill.sh`.
+
+If your UI only accepts one file, upload `SKILL.md` and then add the reference/prompt files if the option appears. If Skills upload is unavailable, use the Gem fallback below.
 
 The older Gem route still works until Google retires Gems (November 2026 for personal accounts): Gems → New Gem → Instructions ← the block in `gemini-gem-instructions.md`; Knowledge ← `SKILL.md` plus the reference parts you use.
 

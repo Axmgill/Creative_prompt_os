@@ -46,13 +46,15 @@ Claude discovers `SKILL.md` and loads the reference files on demand.
 - Cursor: auto-reads `AGENTS.md`; if you prefer `.cursor/rules/`, copy [`portable/chatgpt-instructions.md`](portable/chatgpt-instructions.md)'s block into a rule with `alwaysApply: true`.
 - Copilot: reads `AGENTS.md`; `.github/copilot-instructions.md` also works with the same block.
 
-**Gemini on the web (a skill — the current route)** — download **[`ai-creative-os.zip`](https://github.com/Axmgill/Creative_prompt_os/raw/main/dist/ai-creative-os.zip)** (~393 KB) and upload it directly:
+**Gemini on the web (a skill — the current route)** — download **[`ai-creative-os.zip`](https://github.com/Axmgill/Creative_prompt_os/raw/main/dist/ai-creative-os.zip)** (~394 KB), **unzip it**, then upload the resulting **`ai-creative-os` folder**:
 
 1. gemini.google.com → **Customize** (under *More* if hidden) → **Skills**
-2. **Create** → **Upload** → pick the `.zip` (or the unzipped folder)
+2. **Create** → **Upload** → pick the unzipped `ai-creative-os` folder
 3. Review, then **Create**
 
-The package meets Gemini's upload rules: `SKILL.md` sits in the main folder, the folder is named `ai-creative-os` to match the skill name, the name is kebab-case, the description is 827/1024 characters, and it contains only plain-text files. Invoke it with `/ai-creative-os`, or just describe the job and Gemini matches it.
+Do not rely on uploading the `.zip` directly: some Gemini surfaces/accounts reject it. The folder is the reliable upload unit. It meets Gemini's skill rules: `SKILL.md` sits in the main folder, the folder is named `ai-creative-os` to match the skill name, the name is kebab-case, the description is 827/1024 characters, and it contains only plain-text files. Invoke it with `/ai-creative-os`, or just describe the job and Gemini matches it.
+
+If your Gemini UI only lets you upload a single file, upload `SKILL.md` first and then add the `reference/`, `prompts/`, and `portable/` files as skill files if the option appears. If it has no Skills upload at all, use the Gem or chat fallback below.
 
 Google is replacing Gems with skills (from November 2026 for personal accounts), so this is the route that lasts. The same folder still works as a Gem: create one and upload `reference/` and `prompts/` as knowledge.
 
@@ -94,7 +96,7 @@ tools/
   build-gemini-skill.sh        ← regenerate dist/ai-creative-os.zip
   check.sh                     ← verify budgets, paths, corpus, bundle, Gemini upload rules, and technical-craft rules
 dist/
-  ai-creative-os.zip           ← upload-ready Gemini skill package (~393 KB)
+  ai-creative-os.zip           ← Gemini skill download bundle; unzip and upload folder (~394 KB)
 ```
 
 Every prompt carries a stable `[DOMAIN]-[NN]` ID (`CD-01`, `IP-05`, `VP-07`, `QA-00`, `TECH-00`, …) so routing works the same no matter which host is reading it.

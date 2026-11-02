@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Build dist/ai-creative-os.zip — the upload-ready Gemini skill package.
+# Build dist/ai-creative-os.zip — a Gemini skill download bundle. Unzip and upload the folder.
 #
 # Gemini's upload rules (support.google.com/gemini, "Create & manage skills"):
 #   - SKILL.md must sit in the root (main) folder of the upload
@@ -53,8 +53,9 @@ cat > "$BUNDLE/READ-ME-FIRST.txt" <<'READ_ME'
 AI CREATIVE OS — GEMINI SKILL PACKAGE
 =====================================
 
-Upload this folder (or this .zip) to Gemini as a skill. Setup takes about a
-minute. Everything below happens in Gemini.
+Upload this folder to Gemini as a skill. If you received this as a .zip,
+unzip it first and upload the folder; some Gemini surfaces reject direct
+.zip uploads. Setup takes about a minute. Everything below happens in Gemini.
 
 WHAT'S IN HERE
 --------------
@@ -76,11 +77,12 @@ HOW TO UPLOAD
 1. Go to gemini.google.com
 2. Sidebar → Customize (under More if you don't see it) → Skills
 3. Click Create → Upload
-4. Select this folder, or this .zip file
+4. Select this folder (if you started from a .zip, unzip it first)
 5. Review what Gemini extracted, then click Create
 
-You do not need to unzip it if you upload the .zip. If you upload the folder,
-keep SKILL.md at its top level — do not move it into a subfolder.
+Keep SKILL.md at the top level of the folder — do not move it into a
+subfolder. If your UI only accepts a single file, upload SKILL.md and then
+add the reference/prompt files if the option appears.
 
 The folder works for the older Gems flow too: create a Gem and upload the
 files from reference/ and prompts/ as knowledge. Google is migrating Gems to
@@ -173,7 +175,7 @@ t=open("SKILL.md",encoding="utf-8").read()
 m=re.search(r"^description:\s*(.*)$",t,re.M)
 print(len(m.group(1).strip()))' 2>/dev/null || echo "?")
 
-printf 'build-gemini-skill: wrote dist/%s.zip\n' "$SKILL_NAME"
+printf 'build-gemini-skill: wrote dist/%s.zip (unzip and upload the folder)\n' "$SKILL_NAME"
 printf '  skill name:   %s (kebab-case, matches folder)\n' "$SKILL_NAME"
 printf '  SKILL.md:     main folder of the package\n'
 printf '  description:  %s chars (Gemini limit 1024)\n' "$desc_chars"

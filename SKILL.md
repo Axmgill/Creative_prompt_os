@@ -17,7 +17,7 @@ A versioned library of reusable prompt "roles" for running an AI-assisted creati
 - **`AGENTS.md`** — the universal entry point, written to the `AGENTS.md` standard (Codex, Cursor, GitHub Copilot, Gemini CLI, Jules, Amp, VS Code, Devin, Factory read it natively).
 - **`portable/`** — paste-ready versions for hosts with no file access: Gemini Gems, ChatGPT, Copilot chat, Claude Projects, any API system prompt.
 - **`llms.txt` / `llms-full.txt`** — for web agents that can fetch one URL but cannot browse a repo.
-- **Gemini skills** — this folder is itself a valid Gemini skill package: `SKILL.md` at the main folder, kebab-case name matching the folder, plain-text files only. Upload the folder or `dist/ai-creative-os.zip` at gemini.google.com → Customize → Skills → Create → Upload.
+- **Gemini skills** — this folder is itself a valid Gemini skill package: `SKILL.md` at the main folder, kebab-case name matching the folder, plain-text files only. Upload the folder at gemini.google.com → Customize → Skills → Create → Upload. If you download `dist/ai-creative-os.zip`, unzip it first and upload the folder; some Gemini surfaces reject direct `.zip` uploads.
 
 If you are Claude, keep reading; this file is your entry point.
 

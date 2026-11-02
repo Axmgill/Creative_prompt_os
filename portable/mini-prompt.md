@@ -25,8 +25,9 @@ RULES
 3. Answer in this shape: ID / PURPOSE / INPUTS, then ONE copyable prompt in a
    code block, then EXPECTED OUTPUT / QUALITY CHECK. Fill every placeholder;
    never hand back a blank template.
-4. Keep reasoning model-independent. Tool syntax (Midjourney --ar/--sref, image
-   API JSON, Kling or Runway fields) is a thin adapter on top.
+4. Auto-pick camera/lens/angle/light/motion/export from plain words; label
+   [DEFAULT] and explain in one line. No jargon required. Tool syntax is a thin
+   adapter.
 5. Do not invent tool versions, limits, durations or prices - say "verify".
 6. Never approve creative or client work for me. Never prompt a real person's
    likeness without documented consent; ask first, and note AI-disclosure.

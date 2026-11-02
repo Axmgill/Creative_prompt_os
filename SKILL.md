@@ -1,9 +1,9 @@
 ---
 name: ai-creative-os
-description: A complete, model-agnostic prompt-engineering operating system for AI-driven creative production — creative strategy/concept territories, art direction, design DNA and styleframes, image generation, video generation and camera/character continuity, storyboarding, motion/editing/AE/sound, and asset management & QA. Use this skill whenever the user wants to develop a creative concept or campaign territory, write or refine an AI image/video generation prompt, lock a character/visual-identity reference for consistency across shots, build a storyboard, route a task to the right current AI tool, or run a production QA pass — and wants a structured, reusable, versioned prompt rather than an ad-hoc one-off.
+description: A complete, model-agnostic prompt-engineering operating system for AI-driven creative production — creative strategy/concept territories, art direction, design DNA and styleframes, image generation, video generation and camera/character continuity, storyboarding, motion/editing/AE/sound, asset management & QA, and automatic technical-craft selection. Use this skill whenever the user wants to develop a creative concept or campaign territory, write or refine an AI image/video generation prompt, lock a character/visual-identity reference for consistency across shots, build a storyboard, route a task to the right current AI tool, run a production QA pass, or have camera/lens/angle/lighting/motion/export details chosen from plain language — and wants a structured, reusable, versioned prompt rather than an ad-hoc one-off.
 license: Proprietary. No licence is bundled with this skill package; add one before redistributing or publishing derived work.
 metadata:
-  version: "1.1"
+  version: "1.2"
   author: Axmgill
   homepage: https://github.com/Axmgill/Creative_prompt_os
 ---
@@ -40,6 +40,7 @@ Load this skill when the user's request matches any of these jobs:
 - Manage assets, keep a visual bible, or run a QA pass before delivery → **Part 8**
 - Decide *which current AI tool* to route a task to (image/video/LLM/voice/upscaling) → **Part 1**
 - Set up a new project's shared context, decision log, or approval gates → **Part 2**
+- Have camera, lens, angle, lighting, movement, frame rate, motion/easing, or export details chosen from plain language → **Part 9**, `TECH-00`
 
 If the user just wants a single finished prompt fast and already knows what they want, skip straight to `prompts/standalone-prompts.md` or `prompts/prompts-only.md` rather than reading a full reference part.
 
@@ -57,8 +58,8 @@ ai-creative-os/
 │   ├── chatgpt-instructions.md  ← ChatGPT / Copilot / Cursor
 │   ├── mini-prompt.md           ← fields capped near 1,500 chars
 │   └── kickoff-prompt.md        ← paste-first message for browsing chats
-├── tools/                       ← build.sh (rebuild llms-full.txt), check.sh (verify budgets)
-├── reference/                   ← the 8-part core framework (load only the part(s) you need)
+├── tools/                       ← build.sh (rebuild llms-full.txt), check.sh (verify budgets/rules)
+├── reference/                   ← the 9-part core framework (load only the part(s) you need)
 │   ├── part-1-research-and-routing.md
 │   ├── part-2-library-structure-and-foundation.md
 │   ├── part-3-creative-art-direction.md
@@ -66,9 +67,10 @@ ai-creative-os/
 │   ├── part-5-image-generation.md
 │   ├── part-6-video-generation.md
 │   ├── part-7-storyboards-motion-editing-ae-sound.md
-│   └── part-8-asset-management-qa-workflows.md
+│   ├── part-8-asset-management-qa-workflows.md
+│   └── part-9-technical-craft-and-glossary.md
 └── prompts/
-    ├── prompts-only.md          ← curated, copyable prompt extract of the whole 8-part library
+    ├── prompts-only.md          ← curated, copyable prompt extract of the library
     ├── standalone-prompts.md    ← same prompts, but each one is fully self-contained (no cross-refs)
     └── extensions/              ← prompt sets built after the original 8-part library, not yet
                                     merged into it; still fully usable
@@ -100,6 +102,7 @@ Every prompt in this library has a stable ID in the form `[DOMAIN]-[NN]` (e.g. `
 | `VID` | Video generation, camera/character continuity | Part 6 |
 | `SB`, `MO`, `ED`, `AEX`, `SND` | Storyboard, motion planning, editing, After Effects expressions, sound | Part 7 |
 | `ASM`, `CTY`, `QA`, `WF` | Asset management, continuity, quality assurance, full workflows | Part 8 |
+| `TECH` | Technical craft auto-selection, plain-language translation, glossary, technical QA | Part 9 |
 
 ## Usage conventions (apply these whenever you fill in a prompt from this library)
 
@@ -110,6 +113,7 @@ Every prompt in this library has a stable ID in the form `[DOMAIN]-[NN]` (e.g. `
 5. **Chain roles in order only when the user asks for the full pipeline**: Brief Analysis → Creative Director (territories) → [human selects one] → Art Director (visual language) → Design DNA/Styleframes → Image/Video generation prompts → Storyboard/Motion/Edit → Asset/QA. The chain is a map, not a gate — see convention 6. Skip stages already confirmed in the project context rather than redoing them.
 6. **Never block on a missing dependency.** Most requests arrive mid-chain with the upstream work missing. Use what the user already said, derive a provisional upstream artifact inline (`[PROPOSED]`/`[ASSUMPTION]`), ask **at most one blocking** follow-up question with a default attached, and if the gap persists **skip that stage** (`[SKIPPED: stage — reason]`) and deliver what was actually asked for. A prompt may still *list* further critical questions inside its output (as `BA-01` does) — it just never waits for the answers. Never answer with a prerequisites checklist, never tell the user to go run another prompt first, never send a questionnaire instead of a deliverable. A prompt built on labelled assumptions beats a perfect chain the user abandons.
 7. **Tool/model names in Part 1 are a dated snapshot** (see its own research-date header) — treat specific model version claims there as something to re-verify periodically, not permanent fact.
+8. **Auto-select technical craft.** For visual/temporal deliverables, use `TECH-00` (Part 9) to choose camera/lens/angle/lighting/movement/frame-rate/easing/export details from plain language. Label choices `[DEFAULT]`/`[PROPOSED]`, explain them in one line, and never require the user to know jargon or invent real camera metadata.
 
 ## Quick start
 
@@ -117,3 +121,4 @@ Every prompt in this library has a stable ID in the form `[DOMAIN]-[NN]` (e.g. `
 - Have a brief, need a creative concept → `reference/part-3-creative-art-direction.md`, prompt `CD-01`.
 - Have an approved concept, need a visual identity/character locked across images → `reference/part-5-image-generation.md`, plus `prompts/extensions/creator-reference-locked-prompts.md` if working from a real reference photo.
 - Need one prompt right now, know exactly what you want → `prompts/standalone-prompts.md`.
+- Need camera/lens/angle/lighting/motion/export chosen for you → `reference/part-9-technical-craft-and-glossary.md`, `TECH-00`.

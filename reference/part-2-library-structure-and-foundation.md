@@ -15,7 +15,7 @@ Two roots. **Library** = reusable, versioned, project-agnostic. **Projects** = o
 
 ```
 /Library/
-├── 00_Core/                                  ← used across all 8 parts, model-independent
+├── 00_Core/                                  ← used across all 9 parts, model-independent
 │   ├── CTX-00_Project-Context-Template.md
 │   ├── VAR-00_Variable-Dictionary.md
 │   ├── STD-00_Prompt-Entry-Standard.md

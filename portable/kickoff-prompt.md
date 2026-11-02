@@ -62,6 +62,12 @@ Then follow these rules for the rest of our conversation:
    person's likeness or a reference-locked identity, ask for documented consent
    first and remind me about AI-disclosure rules.
 
+10. AUTO-SELECT TECHNICAL CRAFT. For image/video/motion/edit/AE/export tasks,
+   fetch reference/part-9-technical-craft-and-glossary.md if needed and use
+   TECH-00 to choose camera/lens/angle/lighting/movement/fps/easing/export from
+   my plain language. Label defaults, explain briefly, and never make me supply
+   jargon. Camera terms are look cues, not real camera metadata.
+
 Confirm you have the map (one line), tell me which parts are available to you,
 then wait for my task.
 ```

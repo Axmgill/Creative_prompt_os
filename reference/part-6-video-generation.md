@@ -42,6 +42,9 @@ SUBJECTS / ASSET IDS:   [required if using an approved Part 5 asset (CC-01/PC-01
                          ID), else N/A]
 ENVIRONMENT:            [required]
 COMPOSITION:            [required]
+TECHNICAL DIRECTION:    [required — auto-select via TECH-00: camera/look cue,
+                        lens/focal feel, shot size, angle, focus/DOF, lighting,
+                        movement quality, fps/shutter, color/finish]
 ACTION:                 [required]
 ACTION ORDER:           [required if more than one action occurs]
 SUBJECT MOTION:         [required]
@@ -65,6 +68,8 @@ ACCEPTANCE CRITERIA:    [required]
 ```
 
 This spec must answer: *What exists? What happens first? What moves? What stays still? How does movement unfold? What does the camera do? What must remain consistent? How does the shot end?* If any of those eight questions has no answer in the fields above, the spec isn't finished.
+
+**Technical craft auto-selection:** Run `TECH-00` from Part 9 before finalizing `VID-00`. If the user does not supply camera/lens/angle/lighting/movement/fps terms, select a coherent video default package (`TECH-02`), label it `[DEFAULT]`/`[PROPOSED]`, and explain it in one line. Camera terms are look cues, not real camera metadata.
 
 **Contradiction check (mandatory before finalizing):** cross-check `CAMERA BEHAVIOR` against `MUST REMAIN LOCKED`. If "locked tripod" appears anywhere in `MUST REMAIN LOCKED`/`FORBIDDEN CHANGES` while `CAMERA BEHAVIOR` describes a push-in/pull-out/pan/orbit, **flag this explicitly as a contradiction** requiring resolution — never silently pick one and discard the other.
 
@@ -345,7 +350,7 @@ capability-exceeded recommendation.
 
 ## 6. Deliverable 6 — Camera Language Modules (`CAM`)
 
-Each module describes **visible behavior**, not a guaranteed mechanical control — cross-check Section 1/3: only **Luma's Multi-Keyframe** is a confirmed structured camera control in this set; every other model relies on prompt language as influence, not a guarantee. **Camera movement should always serve `PURPOSE` — never add movement solely to make a shot feel "dynamic."**
+Each module describes **visible behavior**, not a guaranteed mechanical control — cross-check Section 1/3: only **Luma's Multi-Keyframe** is a confirmed structured camera control in this set; every other model relies on prompt language as influence, not a guarantee. **Camera movement should always serve `PURPOSE` — never add movement solely to make a shot feel "dynamic."** For the full camera/lens/angle vocabulary and plain-language defaults, use Part 9 `TECH-02`/`TECH-04`; these `CAM` modules cover movement behavior only.
 
 | Module | Starting viewpoint | Movement path | Speed | Framing change | Subject relationship | Stability | Ending viewpoint |
 |---|---|---|---|---|---|---|---|

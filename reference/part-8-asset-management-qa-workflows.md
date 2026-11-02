@@ -315,7 +315,7 @@ Re-check [ISSUE ID(s)] against the updated material — confirm the fix actually
 
 **Purpose:** A final review gate before a deliverable is considered ready — distinct from Part 7's `PR-00` (a mid-production review of one piece of work). `QA-00` is the pre-delivery gate and can use `PR-00`'s/`CTY-00`'s findings as input.
 **Required inputs:** `[PROJECT_CONTEXT]`, `[APPROVED_REQUIREMENTS]`, `[VISUAL_BIBLE]`, `[DELIVERABLE]`.
-**Optional inputs:** `[TECHNICAL_SPECIFICATIONS]`, `[KNOWN_ISSUES]`.
+**Optional inputs:** `[TECHNICAL_SPECIFICATIONS]`, `[KNOWN_ISSUES]`, `[TECHNICAL_DIRECTION]` (Part 9 `TECH-00` output, if present).
 
 ```
 ROLE: You are the Quality-Control Director. You do NOT approve delivery to
@@ -324,11 +324,13 @@ evidence, and the actual approval decision belongs to the human (and, where
 relevant, the client).
 
 INPUTS: [PROJECT_CONTEXT] [APPROVED_REQUIREMENTS] [VISUAL_BIBLE] [DELIVERABLE]
-[TECHNICAL_SPECIFICATIONS] [KNOWN_ISSUES]
+[TECHNICAL_SPECIFICATIONS] [KNOWN_ISSUES] [TECHNICAL_DIRECTION]
 
 REVIEW: communication objective, approved concept, design quality,
 readability, timing, continuity, branding, exact copy, audio, technical
-defects, delivery specifications.
+defects, delivery specifications, and technical-craft coherence (TECH-06:
+lens/angle/DOF vs legibility, lighting vs shadows, movement vs locks,
+fps/shutter, aspect, audio/export support).
 
 SEPARATE EXPLICITLY:
 - CREATIVE ASSESSMENT        (a judgment call — label it as one)
@@ -785,7 +787,7 @@ DO NOT USE FOR:                 [new work]
 **HOW TO UPDATE THE SYSTEM:** Follow Section 13's seven-step procedure. Keep stable principles and model-specific adapters in clearly separate buckets so a model update never requires touching the structural rules.
 
 **REMAINING GAPS (explicit, not hidden):**
-- No real project has actually run through this system yet — every example across all 8 parts is `[FICTIONAL]`/`[SIMULATED]`. The system is **proposed and internally consistent**, not **field-tested**.
+- No real project has actually run through this system yet — every example across all 9 parts is `[FICTIONAL]`/`[SIMULATED]`. The system is **proposed and internally consistent**, not **field-tested**.
 - Several model-specific facts (Kling 4.0's "coming soon" features, exact Veo reference-image count, Blender's exact current build, Photoshop's exact current build) are flagged as needing re-verification before relying on them.
 - No automation/multi-agent layer has been built or verified — Section 7.2 describes prerequisites only.
 - This library was built entirely in one working session by one assistant; it has not been reviewed by a second person or tested against a real client's actual feedback patterns.

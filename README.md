@@ -2,7 +2,7 @@
 
 A versioned, model-agnostic prompt-engineering operating system for AI-driven creative production, packaged so that **any** agent can use it — not just Claude.
 
-Pipeline it covers: brief → creative strategy and territories → art direction → design DNA and styleframes → image generation → video generation (with camera and character continuity) → storyboard → motion/edit/After Effects/sound → asset management and QA.
+Pipeline it covers: brief → creative strategy and territories → art direction → design DNA and styleframes → image generation → video generation (with camera and character continuity) → storyboard → motion/edit/After Effects/sound → asset management and QA. A technical-craft layer (Part 9, `TECH-00`) auto-selects camera, lens, angle, lighting, movement, frame rate, easing, and export details from plain language, so you do not need to know the jargon.
 
 ## Why it works across agents
 
@@ -46,13 +46,13 @@ Claude discovers `SKILL.md` and loads the reference files on demand.
 - Cursor: auto-reads `AGENTS.md`; if you prefer `.cursor/rules/`, copy [`portable/chatgpt-instructions.md`](portable/chatgpt-instructions.md)'s block into a rule with `alwaysApply: true`.
 - Copilot: reads `AGENTS.md`; `.github/copilot-instructions.md` also works with the same block.
 
-**Gemini on the web (a skill — the current route)** — download **[`ai-creative-os.zip`](https://github.com/Axmgill/Creative_prompt_os/raw/main/dist/ai-creative-os.zip)** (365 KB) and upload it directly:
+**Gemini on the web (a skill — the current route)** — download **[`ai-creative-os.zip`](https://github.com/Axmgill/Creative_prompt_os/raw/main/dist/ai-creative-os.zip)** (~393 KB) and upload it directly:
 
 1. gemini.google.com → **Customize** (under *More* if hidden) → **Skills**
 2. **Create** → **Upload** → pick the `.zip` (or the unzipped folder)
 3. Review, then **Create**
 
-The package meets Gemini's upload rules: `SKILL.md` sits in the main folder, the folder is named `ai-creative-os` to match the skill name, the name is kebab-case, the description is 708/1024 characters, and it contains only plain-text files. Invoke it with `/ai-creative-os`, or just describe the job and Gemini matches it.
+The package meets Gemini's upload rules: `SKILL.md` sits in the main folder, the folder is named `ai-creative-os` to match the skill name, the name is kebab-case, the description is 827/1024 characters, and it contains only plain-text files. Invoke it with `/ai-creative-os`, or just describe the job and Gemini matches it.
 
 Google is replacing Gems with skills (from November 2026 for personal accounts), so this is the route that lasts. The same folder still works as a Gem: create one and upload `reference/` and `prompts/` as knowledge.
 
@@ -68,7 +68,7 @@ Google is replacing Gems with skills (from November 2026 for personal accounts),
 AGENTS.md                      ← universal entry point: protocol, routing table, guardrails
 SKILL.md                       ← Claude Agent Skill entry point + ID registry
 llms.txt / llms-full.txt       ← machine-readable map / whole corpus, one fetch each
-reference/                     ← the 8-part core framework (~5,900 lines)
+reference/                     ← the 9-part core framework (~6,800 lines)
   part-1-research-and-routing.md
   part-2-library-structure-and-foundation.md
   part-3-creative-art-direction.md
@@ -77,38 +77,40 @@ reference/                     ← the 8-part core framework (~5,900 lines)
   part-6-video-generation.md
   part-7-storyboards-motion-editing-ae-sound.md
   part-8-asset-management-qa-workflows.md
+  part-9-technical-craft-and-glossary.md
 prompts/
   prompts-only.md              ← curated copyable extract of the whole library
   standalone-prompts.md        ← same prompts, each fully self-contained
   extensions/                  ← talking-head, reference-locked identity, creator set, UGC/avatar
 portable/
   README.md                    ← which file for which host
-  system-prompt.md             ← full system prompt (~7,200 chars)
+  system-prompt.md             ← full system prompt (~7,800 chars)
   gemini-gem-instructions.md   ← Gemini skill/Gem instructions (~3,800 chars)
-  chatgpt-instructions.md      ← ChatGPT / Copilot / Cursor (~3,900 chars)
-  mini-prompt.md               ← tiny fields (~1,420 chars)
+  chatgpt-instructions.md      ← ChatGPT / Copilot / Cursor (~4,100 chars)
+  mini-prompt.md               ← tiny fields (~1,450 chars)
   kickoff-prompt.md            ← paste-first message for browsing chats
 tools/
   build.sh                     ← regenerate llms-full.txt
   build-gemini-skill.sh        ← regenerate dist/ai-creative-os.zip
-  check.sh                     ← verify budgets, paths, corpus, bundle and Gemini upload rules
+  check.sh                     ← verify budgets, paths, corpus, bundle, Gemini upload rules, and technical-craft rules
 dist/
-  ai-creative-os.zip           ← upload-ready Gemini skill package (365 KB)
+  ai-creative-os.zip           ← upload-ready Gemini skill package (~393 KB)
 ```
 
-Every prompt carries a stable `[DOMAIN]-[NN]` ID (`CD-01`, `IP-05`, `VP-07`, `QA-00`, …) so routing works the same no matter which host is reading it.
+Every prompt carries a stable `[DOMAIN]-[NN]` ID (`CD-01`, `IP-05`, `VP-07`, `QA-00`, `TECH-00`, …) so routing works the same no matter which host is reading it.
 
 ## Keeping it honest
 
 ```bash
-tools/check.sh     # AGENTS.md size, portable character budgets, path references, corpus freshness
+tools/check.sh     # 9 checks: budgets, paths, corpus/bundle freshness, guardrails, technical-craft rules
 tools/build.sh     # rebuild llms-full.txt after editing any reference or prompt file
 ```
 
-Host character limits are enforced by the hosts and change without notice. The budgets in `tools/check.sh` were checked in October 2026; if a limit tightens, trim the craft rules before the consent and approval clauses.
+Host character limits are enforced by the hosts and change without notice. The budgets in `tools/check.sh` were checked in October 2026; if a limit tightens, trim optional routing/examples before the craft rules, and never delete the consent, AI-disclosure, approval, or verification clauses.
 
 ## Notes and limits
 
+- **Technical terms are handled for you.** If you say “premium product video” or “cinematic portrait” without camera/lens/angle details, the skill chooses a coherent technical package, labels it `[DEFAULT]`/`[PROPOSED]`, and explains it in one line. Camera/lens terms are look cues for AI generation, not real camera metadata.
 - **Part 1 is a dated snapshot** (research date in its header) of the AI tool/model landscape. Re-verify version claims before relying on them.
 - **Real people.** `prompts/extensions/creator-reference-locked-prompts.md` requires documented consent before generating images of a real person's likeness. That is not optional, and the portable prompts repeat it.
 - **Synthetic humans** need AI-disclosure in many advertising contexts; the library flags this but cannot verify current policy or law for you.

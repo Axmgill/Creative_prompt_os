@@ -2,16 +2,16 @@
 
 The rest of this repository assumes the agent can read files: Claude Code, Codex, Cursor, Gemini CLI, Copilot, Jules, and other agents that load `SKILL.md` or `AGENTS.md` from disk. **Portable mode exists for every agent that cannot** — a Gemini Gem, a Custom GPT, a Copilot chat window, an API call, a plain web conversation, a phone app.
 
-Same protocol, compressed to fit. No repository access required.
+Same protocol, compressed to fit. No repository access required. Every portable block now auto-selects technical craft (camera, lens, angle, lighting, movement, frame rate, easing, export) from plain language, labels defaults, and explains them briefly.
 
 ## Pick your file
 
 | Your host | File | Field size |
 |---|---|---|
 | Gemini Gem (web) | [`gemini-gem-instructions.md`](gemini-gem-instructions.md) | ~3,800 chars (field allows ~4,000) |
-| ChatGPT custom instructions (paid) | [`chatgpt-instructions.md`](chatgpt-instructions.md) | ~3,900 chars (limit 5,000) |
-| ChatGPT custom instructions (free) | [`mini-prompt.md`](mini-prompt.md) | ~1,420 chars (limit 1,500) |
-| Custom GPT / Claude Project / API system prompt | [`system-prompt.md`](system-prompt.md) | ~7,200 chars (GPT limit 8,000) |
+| ChatGPT custom instructions (paid) | [`chatgpt-instructions.md`](chatgpt-instructions.md) | ~4,100 chars (limit 5,000) |
+| ChatGPT custom instructions (free) | [`mini-prompt.md`](mini-prompt.md) | ~1,450 chars (limit 1,500) |
+| Custom GPT / Claude Project / API system prompt | [`system-prompt.md`](system-prompt.md) | ~7,800 chars (GPT limit 8,000) |
 | Copilot repo instructions, Cursor rule | [`chatgpt-instructions.md`](chatgpt-instructions.md) | no fixed cap |
 | Any tiny persona field | [`mini-prompt.md`](mini-prompt.md) | fits ~1,500 |
 | Web chat that can browse or fetch URLs | [`kickoff-prompt.md`](kickoff-prompt.md) | pasted per conversation |
@@ -21,7 +21,7 @@ Each file contains one fenced block. **Copy the contents of the block only** —
 ## Install, by host
 
 **Gemini (web) — upload the skill package**
-The current route is a skill, not a Gem. [Download `ai-creative-os.zip`](https://github.com/Axmgill/Creative_prompt_os/raw/main/dist/ai-creative-os.zip) (365 KB), then: Customize → Skills → Create → Upload → pick the zip. It already satisfies Gemini's rules — `SKILL.md` in the main folder, folder named to match the kebab-case skill name, plain-text files only. Rebuild it with `tools/build-gemini-skill.sh`.
+The current route is a skill, not a Gem. [Download `ai-creative-os.zip`](https://github.com/Axmgill/Creative_prompt_os/raw/main/dist/ai-creative-os.zip) (~393 KB), then: Customize → Skills → Create → Upload → pick the zip. It already satisfies Gemini's rules — `SKILL.md` in the main folder, folder named to match the kebab-case skill name, plain-text files only. Rebuild it with `tools/build-gemini-skill.sh`.
 
 The older Gem route still works until Google retires Gems (November 2026 for personal accounts): Gems → New Gem → Instructions ← the block in `gemini-gem-instructions.md`; Knowledge ← `SKILL.md` plus the reference parts you use.
 
@@ -60,8 +60,8 @@ What a portable prompt must never do: open with a prerequisites checklist, tell 
 
 Be honest with yourself about the trade:
 
-- **Kept:** the routing logic, the status-tag discipline, the ask-vs-assume rule, the conflict rule, the output shape, one-prompt-per-shot craft rules, the consent and approval guardrails.
-- **Lost:** the actual 5,900 lines of reference reasoning, the per-model adapters (`ADP-*`, `ADPV-*`), the full `STD-00` entry template, the workflow chains in Part 8, and the specific prompt text in `prompts/`.
+- **Kept:** the routing logic, the status-tag discipline, the ask-vs-assume rule, the conflict rule, the output shape, one-prompt-per-shot craft rules, technical-craft auto-selection, the consent and approval guardrails.
+- **Lost:** the actual reference reasoning, the per-model adapters (`ADP-*`, `ADPV-*`), the full `STD-00` entry template, the workflow chains in Part 8, the full Part 9 glossary/default tables, and the specific prompt text in `prompts/`.
 - **Consequence:** a portable agent writes *plausible* prompts in the library's style. It cannot quote `VP-07` unless you gave it `part-7`/`part-6` as knowledge. If the work is high-stakes, use a file-reading host.
 
 ## Keeping portable prompts honest
@@ -69,10 +69,10 @@ Be honest with yourself about the trade:
 Character limits are enforced by the hosts, not by us, and they change without notice. The numbers above were checked in **October 2026** and are recorded in `tools/check.sh`, which fails if any block exceeds its budget.
 
 ```bash
-tools/check.sh     # verify every portable block still fits, and every path still exists
+tools/check.sh     # 9 checks: portable budgets, paths, corpus/bundle freshness, guardrails, technical-craft rules
 ```
 
-If a limit tightens, trim the `BOUNDARIES` section first, then the craft rules — never the consent or approval clauses.
+If a limit tightens, trim optional routing/examples first, then the craft rules — never the consent, AI-disclosure, approval, or verification clauses. If the block still will not fit, use `mini-prompt.md` rather than deleting guardrails.
 
 ## Agreement with the rest of the repo
 

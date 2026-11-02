@@ -4,6 +4,8 @@ This builds directly on `CREATOR-00`/`CREATOR-01`/`CREATOR-02` (the general crea
 
 **Required before you use any of this:** a real photo, and **documented consent** from that person to generate AI images of their likeness. This is not optional and not something any prompt or tool can verify for you — confirm it yourself before generating anything. If the reference is a public figure or anyone other than you, get that confirmed in writing.
 
+**Technical craft (Part 9):** Inherit `TECH-00` from `reference/part-9-technical-craft-and-glossary.md`. If the user has not supplied camera, lens, angle, lighting, movement, easing, frame-rate, or export terms, auto-select one coherent technical package, label it `[DEFAULT]`/`[PROPOSED]`, and add one plain-English "Why" line. Do not ask the user to learn jargon. Camera/lens terms are AI look cues, not real camera metadata. Preserve consent, identity, brand, and other locked requirements.
+
 **A practical limitation to expect:** several image models restrict or outright refuse generating photoreal images of real, identifiable people from a single reference photo — this is a deliberate policy guardrail against impersonation/deepfakes, not a prompt-wording problem. If a model refuses or the identity doesn't carry over reliably, that's a tool/policy limitation, not something to "prompt-engineer around" — you may need a tool explicitly built for consented identity-preservation (and that still verifies consent on its end). `CREATOR-REF-00` below includes a test step specifically to catch this early, before you build a whole shot list around a reference that won't actually hold.
 
 ---

@@ -16,7 +16,9 @@ brief → creative strategy/territories → art direction → design DNA + style
       → storyboard → motion / edit / After Effects / sound → asset management & QA
 ```
 
-Every prompt has a stable `[DOMAIN]-[NN]` ID (`CD-01`, `IP-05`, `VP-07`, `QA-00`, …). Treat this repository as **reference material you pull from**, not as something to memorise, summarise, or recite. Never dump a whole reference part into a reply.
+Every prompt has a stable `[DOMAIN]-[NN]` ID (`CD-01`, `IP-05`, `VP-07`, `QA-00`, `TECH-00`, …). Treat this repository as **reference material you pull from**, not as something to memorise, summarise, or recite. Never dump a whole reference part into a reply.
+
+Visual and temporal deliverables also inherit a technical-craft layer (Part 9, `TECH-00`): the agent auto-selects camera, lens, angle, lighting, movement, frame rate, motion/easing, and export details from plain language, labels defaults, and explains them briefly. The user is never required to know technical jargon.
 
 ## 2. Protocol — how to answer any request about creative work
 
@@ -27,6 +29,7 @@ Every prompt has a stable `[DOMAIN]-[NN]` ID (`CD-01`, `IP-05`, `VP-07`, `QA-00`
 5. **Separate core from adapter.** The reasoning inside a prompt is model-independent. Tool syntax (Midjourney `--ar/--sref/--oref`, a JSON body for an image API, Kling/Runway parameter fields) is a thin adapter layered on top. Never rewrite the underlying reasoning per tool.
 6. **Answer in the library's shape.** Use the abbreviated `STD-00` form: `ID` · `PURPOSE` · `INPUTS` · one **copyable prompt** in a code block · `EXPECTED OUTPUT` · `QUALITY CHECK`. The copyable prompt is what the user pastes into a generation tool, so keep your commentary outside the block.
 7. **Never invent authority or specs.** You cannot approve creative work or client work — you recommend, the human decides. Tool versions, limits, durations, prices, and model names in `reference/part-1-research-and-routing.md` are a dated snapshot; the part header carries the research date. Say "verify this" instead of guessing.
+8. **Auto-select technical craft.** For image/video/motion/edit/AE/export deliverables, use `TECH-00` from `reference/part-9-technical-craft-and-glossary.md`. If the user does not supply camera/lens/angle/lighting/motion terms, choose coherent defaults, label them `[DEFAULT: value]` or `[PROPOSED: value]`, and add one plain-English explanation. Never require jargon and never invent real camera metadata.
 
 ## 3. Dependency handling — never block, never lecture
 
@@ -92,6 +95,7 @@ A proposed direction only becomes binding once it is logged as a decision (`DEC-
 | Design DNA doc, styleframes, design iteration | `reference/part-4-design-dna-styleframes.md` | `DNA-00`/`DNA-01`, `SF-01`, `DE-01`, `CI-01`, `MR-01` |
 | Image generation prompt, character/product shots, in-image consistency | `reference/part-5-image-generation.md` | `IMG-00`, `IP-01`–`IP-12`, `CC-01`, `IGC-01`; adapters `ADP-*` |
 | Video generation prompt, camera moves, shot-to-shot continuity | `reference/part-6-video-generation.md` | `VID-00`, `VP-01`–`VP-16`, `VCC-01`; adapters `ADPV-*` |
+| Camera, lens, angle, lighting, movement, frame rate, motion/easing, export, or "I don't know technical terms" | `reference/part-9-technical-craft-and-glossary.md` | `TECH-00`, `TECH-01`–`TECH-06` |
 | Storyboard, motion beats, edit plan, AE expressions, sound | `reference/part-7-storyboards-motion-editing-ae-sound.md` | `SB-00`, `MD-00`, `ED-00`, `AEB-00`, `AEX-00`, `SND-*` |
 | Asset register, visual bible, continuity audit, QA before delivery | `reference/part-8-asset-management-qa-workflows.md` | `ASM-01`, `VB-00`–`VB-04`, `CTY-00`, `QA-00` |
 | Feedback interpretation, revisions, client-ready change summary | `reference/part-3-creative-art-direction.md` + `reference/part-8-asset-management-qa-workflows.md` | `FB-01`, `CHG-00`, `RP-01`, `RR-01`, `CRD-01` |
@@ -106,7 +110,7 @@ A proposed direction only becomes binding once it is logged as a decision (`DEC-
 Unless the user asks for something else, every deliverable is:
 
 1. One line naming the pipeline stage, the prompt ID used, and any file you read.
-2. The abbreviated `STD-00` block (§2.6), with the copyable prompt in a fenced code block, all `[PLACEHOLDERS]` already filled from what the user told you — never hand back an unfilled template.
+2. The abbreviated `STD-00` block (§2.6), with the copyable prompt in a fenced code block, all `[PLACEHOLDERS]` already filled from what the user told you — never hand back an unfilled template. For image/video/motion/edit deliverables, include the `TECHNICAL DIRECTION` block from `TECH-00` (camera/look, lens, angle, lighting, movement, easing/export as relevant), labelled `[DEFAULT]`/`[PROPOSED]` when inferred, plus one plain-English "Why" line.
 3. Assumptions, skipped stages (`[SKIPPED: …]`), and at most **one** open question — not a list of them.
 4. One line: the next prompt ID in the chain, marked optional.
 
@@ -133,7 +137,7 @@ If you cannot read this repository, the library is still usable: the same protoc
 | A web chat that can browse and you want the full library | paste `portable/kickoff-prompt.md` |
 | An agent that can fetch one URL | `llms.txt` for the map, `llms-full.txt` for the whole corpus |
 
-Tell the user which of these you used, so they know the agent has the reduced version rather than the full 8-part reference.
+Tell the user which of these you used, so they know the agent has the reduced version rather than the full 9-part reference.
 
 ## 9. Conventions for editing this repository
 

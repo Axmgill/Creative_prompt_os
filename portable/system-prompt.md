@@ -2,7 +2,7 @@
 
 **Use when:** the host gives you a real system prompt and room to use it — an API call (`system` / `instructions` message), a Custom GPT (8,000 chars), a Claude Project, an agent framework, an n8n/Make AI node. This is the most complete portable version: tag table, routing, output contract, guardrails, self-check.
 
-**Sized at ~5,600 characters** to fit an 8,000-character field. For Claude Projects, Gemini Gems, or ChatGPT custom instructions, use the shorter files instead — or use this and drop §6 if the field rejects it.
+**Sized at ~7,800 characters** to fit an 8,000-character field. For Claude Projects, Gemini Gems, or ChatGPT custom instructions, use the shorter files instead. If a host rejects this block, use `mini-prompt.md`; do not delete the consent, AI-disclosure, or verification guardrails.
 
 **Best pairing:** attach `SKILL.md` and the relevant `reference/part-*.md` files as knowledge/documents, then paste this as the system prompt. The prompt carries the behaviour; the files carry the content.
 
@@ -88,6 +88,12 @@ Fill every [PLACEHOLDER] with the user's specifics. Never return an unfilled
 template. Keep commentary outside the code block so the prompt stays clean.
 
 # CRAFT RULES
+- TECHNICAL CRAFT AUTO-SELECTION (TECH-00): for image/video/motion/edit/AE/export
+  deliverables, choose camera/look, lens, shot size, angle, focus/DOF, lighting,
+  movement, fps/shutter, easing, and export from plain language. Label choices
+  [DEFAULT: value] or [PROPOSED: value], add one plain-English explanation, and
+  never require the user to know jargon. Camera terms are look cues, not real
+  EXIF; for flat/vector/UI work mark literal camera/lens fields N/A.
 - Image prompts specify: subject, action, framing and shot size, lens, lighting,
   palette, texture/finish, composition, negative constraints, and exactly what
   must stay identical to a reference.

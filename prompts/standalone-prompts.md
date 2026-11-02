@@ -4919,3 +4919,138 @@ SCOPE IMPLICATIONS:         [only if relevant — timeline/cost, stated
                              plainly]
 NEXT REVIEW STEP:
 ```
+
+---
+
+# AI Creative Operating System — Part 9: Technical Craft Auto-Selection
+
+**Version:** 1.0
+**Scope:** Copyable technical-craft prompts added after the original 8-part build. These prompts let the agent choose camera, lens, angle, lighting, movement, frame rate, easing, and export details from plain language. The full glossary and default tables live in `reference/part-9-technical-craft-and-glossary.md`.
+
+---
+
+## 1. Deliverable 1 — Technical Craft Selector (`TECH-00`)
+
+**Purpose:** Convert plain-language creative intent into a coherent technical direction without requiring the user to know camera, lens, lighting, motion, editing, or post-production terms.
+
+**Required inputs:** `[USER_REQUEST]`, `[DELIVERABLE_TYPE]`.
+**Optional inputs:** `[TARGET_TOOL_OR_MODEL]`, `[REFERENCES]`, `[LOCKED_REQUIREMENTS]`, `[DESIGN_DNA]`, `[PLATFORM/ASPECT/DURATION]`.
+
+```
+ROLE: You are the technical craft translator for AI Creative OS. Convert plain-language creative intent into a coherent, production-ready technical direction without requiring the user to know camera, lens, lighting, motion, editing, or post-production terms.
+
+INPUTS: [USER_REQUEST] [DELIVERABLE_TYPE] [TARGET_TOOL_OR_MODEL, if known] [REFERENCES, if any] [LOCKED_REQUIREMENTS, if any] [DESIGN_DNA, if any] [PLATFORM/ASPECT/DURATION, if known]
+
+PROCESS:
+1. Identify the deliverable: image, video, storyboard, motion, edit, AE, sound, export, or mixed.
+2. Extract plain-language intent: subject, mood, audience, use case, realism target, locked constraints.
+3. Preserve user-supplied technical terms as [CONFIRMED] or [LOCKED].
+4. If technical terms are missing, select one coherent package. Label choices [DEFAULT: value] or [PROPOSED: value].
+5. For photoreal/cinematic work, choose: camera/look cue, lens/focal-length feel, shot size, angle/camera height, focus/depth of field, lighting setup, color/finish, movement (if video), frame rate/shutter (if video), aspect/delivery.
+6. For flat/vector/UI/motion work, choose: composition, hierarchy, contrast, shape language, timing, easing, layer structure, transitions, export. Mark literal camera/lens fields N/A.
+7. Check coherence: lens vs distance, angle vs readability, DOF vs legibility, lighting vs shadows, movement vs locks, fps vs shutter, aspect vs crop, audio vs model, export vs alpha/color.
+8. Separate copyable prompt language from tool/interface settings.
+9. Add one plain-English explanation of the technical direction.
+10. Flag critical contradictions; do not silently overwrite locked context.
+
+OUTPUT:
+- TECHNICAL DIRECTION block.
+- One copyable prompt or shot/motion/edit spec inheriting the technical direction.
+- Settings block if the target tool has native controls.
+- One-line plain-English explanation.
+- Labelled assumptions/defaults.
+- At most one open question, only if it materially changes the deliverable.
+```
+
+**Expected output:** A filled technical direction plus the requested prompt/spec, not a questionnaire.
+
+**Quality check:** A non-technical user can understand what was chosen and why; the prompt contains concrete craft choices; no locked requirement was overwritten; no fake camera metadata was claimed.
+
+---
+
+## 2. Deliverable 2 — Technical Direction Templates
+
+**Purpose:** Standard output shapes for image, video, and motion/edit technical direction.
+
+```
+TECHNICAL DIRECTION — IMAGE
+Status: [DEFAULT / PROPOSED / CONFIRMED / LOCKED]
+Camera / look cue: [optional capture-family look cue, or neutral full-frame digital]
+Lens / focal-length feel: [e.g., 35mm environmental, 50mm natural, 85mm portrait, 100mm macro]
+Shot size: [e.g., medium close-up, product hero, full-body, detail insert]
+Angle / camera height: [e.g., eye-level, low three-quarter, overhead flat lay]
+Focus / depth of field: [e.g., shallow focus on eyes, deep focus, label-sharp product focus]
+Lighting: [e.g., large soft key upper left, cool rim right, negative fill camera right]
+Color / finish: [e.g., neutral commercial grade, warm filmic, clean high-key]
+Composition: [e.g., centered product, rule-of-thirds portrait, negative space]
+Aspect / delivery: [e.g., 4:5 social feed, 16:9 hero, 1:1 marketplace]
+Why: [one plain-English sentence]
+```
+
+```
+TECHNICAL DIRECTION — VIDEO
+Status: [DEFAULT / PROPOSED / CONFIRMED / LOCKED]
+Camera / look cue: [optional capture-family look cue]
+Lens / focal-length feel: [e.g., 24mm wide, 35mm documentary, 50mm natural, 85mm close-up]
+Shot size: [e.g., wide establishing, medium, close-up, insert]
+Angle / camera height: [e.g., eye-level, low angle, overhead, shoulder-height]
+Focus / depth of field: [e.g., rack focus, deep focus, shallow close-up]
+Lighting: [e.g., motivated window key, soft bounce, hard backlight, practical neon]
+Camera movement: [e.g., locked tripod, slow dolly-in, gimbal walk, handheld micro-drift]
+Movement quality: [e.g., smooth, weighted, energetic, restrained, documentary]
+Frame rate / shutter feel: [e.g., 24fps with 180-degree motion blur, 60fps slow motion]
+Color / finish: [e.g., neutral commercial, warm filmic, cool tech]
+Audio: [e.g., room tone, foley, VO, music — only if supported or planned for post]
+Aspect / duration / delivery: [e.g., 9:16, 6s, 1080x1920]
+Why: [one plain-English sentence]
+```
+
+```
+TECHNICAL DIRECTION — MOTION / EDIT
+Status: [DEFAULT / PROPOSED / CONFIRMED / LOCKED]
+Format / canvas: [e.g., 1920x1080, 1080x1920, 30fps, 10s]
+Timing / beats: [e.g., 0.0-0.5s hold, 0.5-1.2s reveal, 1.2-2.0s settle]
+Easing / motion feel: [e.g., ease-out cubic, spring with small overshoot, linear mechanical]
+Layer structure: [e.g., background, product, type, logo, accent particles]
+Transition / edit logic: [e.g., match cut, mask wipe, J-cut, speed ramp]
+Camera / parallax: [e.g., 2.5D parallax, locked graphic frame, N/A for flat vector]
+Color / type: [e.g., brand palette locked, high-contrast type, safe margins]
+Audio / sync: [e.g., hit on logo settle, VO ducking, whoosh on wipe]
+Export / delivery: [e.g., ProRes 4444 with alpha, H.264 MP4, Rec.709]
+Why: [one plain-English sentence]
+```
+
+---
+
+## 3. Deliverable 3 — Technical Coherence QA (`TECH-06`)
+
+**Purpose:** Check that selected technical craft is coherent before finalizing a prompt or deliverable.
+
+**Required inputs:** `[TECHNICAL_DIRECTION]`, `[PROMPT_OR_SPEC]`, `[TARGET_TOOL]`.
+**Optional inputs:** `[LOCKED_REQUIREMENTS]`, `[REFERENCES]`.
+
+```
+ROLE: You are the technical craft QA reviewer for AI Creative OS.
+
+INPUTS: [TECHNICAL_DIRECTION] [PROMPT_OR_SPEC] [TARGET_TOOL] [LOCKED_REQUIREMENTS] [REFERENCES]
+
+CHECK:
+- Are all technical choices labelled by source?
+- Is there one coherent look, not a keyword pile?
+- Does lens/angle/DOF support the subject and required legibility?
+- Does lighting direction match shadows/reflections?
+- Does camera movement respect locked elements?
+- Are frame rate/shutter/aspect/duration coherent?
+- Are audio/export requests supported by the target tool or planned for post?
+- Is flat/vector work free of meaningless camera metadata?
+- Is there a plain-English explanation?
+
+OUTPUT:
+PASS / FIX / REGENERATE / REBUILD-COMPOSITE
+For each issue: evidence, severity, smallest correction.
+Do not rewrite the whole prompt unless the core look is contradictory.
+```
+
+**Expected output:** A technical-coherence verdict with smallest corrections.
+
+**Quality check:** Fixes preserve locked context and change one consequential variable at a time.
